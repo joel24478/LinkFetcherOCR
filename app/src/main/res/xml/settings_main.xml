@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
+
+    <!--<ListPreference-->
+        <!--android:defaultValue="@string/settings_world_default"-->
+        <!--android:entries="@array/settings_world_labels"-->
+        <!--android:entryValues="@array/settings_world_values"-->
+        <!--android:key="@string/settings_world_key"-->
+        <!--android:title="@string/settings_world_label"/>-->
+
+    <!--<ListPreference-->
+        <!--android:defaultValue="@string/settings_sports_default"-->
+        <!--android:entries="@array/settings_sports_labels"-->
+        <!--android:entryValues="@array/settings_sports_values"-->
+        <!--android:key="@string/settings_sports_key"-->
+        <!--android:title="@string/settings_sports_label"/>-->
+
+    <!--<ListPreference-->
+        <!--android:defaultValue="@string/settings_language_default"-->
+        <!--android:entries="@array/settings_language_labels"-->
+        <!--android:entryValues="@array/settings_language_values"-->
+        <!--android:key="@string/settings_language_key"-->
+        <!--android:title="@string/settings_language_label"/>-->
+
+</PreferenceScreen>
