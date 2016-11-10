@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,8 +43,62 @@ public class LinkAdapter extends ArrayAdapter<Link> {
         //Get an link and give it a position
         Link currentLink = getItem(position);
 
+        //Get the ImageView that holds the image of the link
+        ImageView linkImage = (ImageView) listItemView.findViewById(R.id.link_image);
+        //Set the image
+        linkImage.setImageBitmap(currentLink.getFavicon());
+
+        //Get the TextView that holds the name of the link
+        TextView linkName = (TextView) listItemView.findViewById(R.id.link_name);
+        //Set the name
+        linkName.setText(currentLink.getName());
+
+        //Get the TextView that holds the tab title of the link
+        TextView linkTabName = (TextView) listItemView.findViewById(R.id.link_tab_title);
+        //Set the name
+        linkName.setText(currentLink.getTabName());
+
+        //Get the TextView that holds the date for the link
+        TextView linkDate = (TextView) listItemView.findViewById(R.id.link_date);
+        //Set the date
+        linkDate.setText(currentLink.getDate());
 
 
         return listItemView;
+    }
+
+    public String convertStringToDate(String dateString)
+    {
+        Date date = null;
+        String formattedDate = null;
+        DateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat newFormat = new SimpleDateFormat("LLL dd, yyyy");
+        try{
+            date = oldFormat.parse(dateString);
+            formattedDate = newFormat.format(date);
+        }
+        catch ( Exception ex ){
+            System.out.println(ex);
+        }
+        return formattedDate;
+    }
+
+    /**
+     * Return the formatted date string (i.e. "4:30 PM") from a String.
+     */
+    public String convertStringToTime(String dateString)
+    {
+        Date time = null;
+        String formattedDate = null;
+        DateFormat oldFormat = new SimpleDateFormat("hh:mm:ss");
+        DateFormat newFormat = new SimpleDateFormat("h:mm a");
+        try{
+            time = oldFormat.parse(dateString);
+            formattedDate = newFormat.format(time);
+        }
+        catch ( Exception ex ){
+            System.out.println(ex);
+        }
+        return formattedDate;
     }
 }
