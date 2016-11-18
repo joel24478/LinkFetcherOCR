@@ -31,8 +31,9 @@ whoever wants to take these
 ####Joel####
 Google API - We are using the google api to fetch the text from images. We moved away from using tesseract, because we were having horrible results where it was getting the text from images completely wrong. Its implemented into our code.
 ####Martin####
-We have the camera detecting text and now are in the process of getting everytrhing together.
-The GUI is still a work in progress but you can see what we are going for here is a picture below.
+We have the camera detecting text and now are in the process of getting everything together.
+The GUI is still a work in progress, this is what we have so far.
+![alt tag]http://s50.photobucket.com/user/MartinRudzki/media/Capture_zpsii44xicm.jpg.html?filters[user]=145862747&filters[recent]=1&sort=1&o=0
 
 
 
