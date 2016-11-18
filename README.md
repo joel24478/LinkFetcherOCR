@@ -34,7 +34,7 @@ Google API - We are using the google api to fetch the text from images. We moved
 We have the camera detecting text and now are in the process of getting everything together.
 The GUI is still a work in progress, this is what we have so far.
 
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/Capture_zpsii44xicm.jpg)
+![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/510197de-2de6-4b86-b339-daca73fbdd5e_zpsiqwg7z26.jpg)
 ####Jonathan####
 The Database is completed and we are in the process of getting everything together.
 
