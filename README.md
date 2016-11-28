@@ -38,4 +38,15 @@ The GUI is still a work in progress, this is what we have so far.
 ####Jonathan####
 The Database is completed and we are in the process of getting everything together.
 
+##Progress Report #2:##
+####Joel####
+Google API - Up and running, is working with the images
+
+####Martin####
+GUI is comming along but still needs a little polishing. Camera is not where we want it.
+
+####Jonathan####
+The Database is up and running and we have it working great with the rest of the app.
+
+
 
