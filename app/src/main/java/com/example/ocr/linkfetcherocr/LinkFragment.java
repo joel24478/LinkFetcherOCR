@@ -63,12 +63,6 @@ public class LinkFragment extends Fragment
     private SimpleCursorAdapter dataAdapter;
 
     ListView linksListView;
-
-    LinkCursorAdapter newAdapt;
-
-    private Cursor mCursor;
-
-    private ListView mListView;
     /*Jwydo*/
 
     public LinkFragment(){
