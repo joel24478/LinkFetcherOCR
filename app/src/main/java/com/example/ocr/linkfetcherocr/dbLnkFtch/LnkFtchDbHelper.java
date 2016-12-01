@@ -17,13 +17,20 @@ package com.example.ocr.linkfetcherocr.dbLnkFtch;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
+import com.example.ocr.linkfetcherocr.R;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract.LinkEntry;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -37,11 +44,12 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
         public  final String LOG_TAG = LnkFtchDbHelper.class.getSimpleName();
         private static final String DATABASE_NAME = "lnkFtchr.db";
-        private static final int DATABASE_VERSION = 2;
+        private static final int DATABASE_VERSION = 4;
         public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME + "("
             + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
             + LnkContract.LinkEntry.COLUMN_FETCHED_NAME + " TEXT, "
             + LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS + " TEXT, "
+            + LnkContract.LinkEntry.COLUMN_IMAGE + " TEXT, "
             + LnkContract.LinkEntry.COLUMN_FETCHED_URL + " TEXT, "
             + LnkContract.LinkEntry.COLUMN_SEARCHED_TIME + " TEXT);";
 
@@ -58,9 +66,10 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            if(newVersion>oldVersion)
-            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME);
-            onCreate(db);
+            if(newVersion>oldVersion) {
+                db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME);
+                onCreate(db);
+            }
         }
 
         public LnkFtchDbHelper open() throws SQLException{
@@ -74,9 +83,11 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
             }
         }
 
-        public long createEntry(String name, String address, String url){
+        public long createEntry(String name, String address, String url, String photoUrl){
             ContentValues initVals = new ContentValues();
+            //Ref: @http://stackoverflow.com/questions/6341776/how-to-save-bitmap-in-database
             initVals.put(LinkEntry.COLUMN_FETCHED_NAME, name);
+            initVals.put(LinkEntry.COLUMN_IMAGE, photoUrl);
             initVals.put(LinkEntry.COLUMN_FETCHED_ADDRESS, address);
             initVals.put(LinkEntry.COLUMN_FETCHED_URL, url);
             return mDb.insert(LinkEntry.TABLE_NAME, null, initVals);
@@ -92,12 +103,12 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
             Cursor nmCursor = null;
             if (inpUrl == null || inpUrl.length() == 0) {
                 nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[]{
-                        LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL
+                        LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
                 }, null, null, null, null, null);
             }
             else{
                 nmCursor = mDb.query(true, LinkEntry.TABLE_NAME, new String[] {
-                        LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL
+                        LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
                 }, LinkEntry.COLUMN_FETCHED_URL + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
             }
             if (nmCursor != null){
@@ -108,7 +119,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
         public Cursor fetchAllInfo(){
             Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[] {
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL
+                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
             },null, null, null, null, null);
             if(nmCursor != null){
                 nmCursor.moveToFirst();
@@ -117,9 +128,9 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         }
 
         public void insertSomeFakeEntries(){
-            createEntry("Jonathan", "jwydola@hotmail.com", "http://www.facebook.com");
-            createEntry("Katherine", "kObert@obert.net", "www.reddit.com");
-            createEntry("csDepartment", "csDepot", "www.cs.uml.edu");
+            createEntry("Jonathan", "jwydola@hotmail.com", "http://www.facebook.com","something");
+            createEntry("Katherine", "kObert@obert.net", "http://www.reddit.com", "something");
+            createEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "some");
         }
 
         private void copyDataBase() {

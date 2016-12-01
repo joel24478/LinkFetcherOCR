@@ -2,6 +2,8 @@ package com.example.ocr.linkfetcherocr;
 
 import android.graphics.Bitmap;
 
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+
 import java.net.URL;
 
 /**
@@ -24,7 +26,6 @@ public class Link {
 
     //The date when the link was fetched
     private String date;
-
 
     /**
      * Constructs a new {@link Link} object without a description.

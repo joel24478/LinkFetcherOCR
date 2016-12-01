@@ -16,6 +16,7 @@
 package com.example.ocr.linkfetcherocr.dbLnkFtch;
 
 import android.content.ContentResolver;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -80,6 +81,7 @@ public final class LnkContract {
 
         public final static String COLUMN_FETCHED_URL = "url";
         public final static String COLUMN_SEARCHED_TIME = "time";
+        public final static String COLUMN_IMAGE = "image";
         public static boolean isValidEmail(String email) {
             return true;
         }

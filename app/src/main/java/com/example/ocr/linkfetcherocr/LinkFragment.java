@@ -235,14 +235,15 @@ public class LinkFragment extends Fragment
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
                 LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL
+                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
+                LnkContract.LinkEntry.COLUMN_IMAGE
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
                 R.id.link_name,
                 R.id.link_url,
-                R.id.link_address
+                R.id.link_address,
         };
 
         // create the adapter using the cursor pointing to the desired data
@@ -255,7 +256,7 @@ public class LinkFragment extends Fragment
                 0);
         linksListView.setAdapter(dataAdapter);
 
-
+        /*adds the webpage intent*/
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -264,10 +265,11 @@ public class LinkFragment extends Fragment
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
                 // Get the state's capital from this row in the database.
-                String name =
-                        cursor.getString(cursor.getColumnIndexOrThrow("name"));
-                Toast.makeText(getActivity().getApplicationContext(),
-                        name, Toast.LENGTH_SHORT).show();
+                String url =
+                        cursor.getString(cursor.getColumnIndexOrThrow("url"));
+                Intent newI = new Intent(Intent.ACTION_VIEW);
+                newI.setData(Uri.parse(url));
+                startActivity(newI);
 
             }
         });
