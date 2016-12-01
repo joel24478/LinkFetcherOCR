@@ -27,6 +27,13 @@ public class Link {
     //The date when the link was fetched
     private String date;
 
+<<<<<<< HEAD
+=======
+    //The database
+    private LnkFtchDbHelper db;
+
+
+>>>>>>> 339c8d7a592298df8ffa33b2e6ef5af08ffa1308
     /**
      * Constructs a new {@link Link} object without a description.
      *
