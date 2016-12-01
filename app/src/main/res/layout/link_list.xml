@@ -13,7 +13,6 @@
         android:dividerHeight="0dp"
         android:paddingTop="50dp"/>
 
-
     <!-- Empty view is only visible when the list has no items. -->
     <TextView
         android:id="@+id/empty_view"
@@ -21,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textAppearance="?android:textAppearanceMedium"/>
-
     <EditText android:id="@+id/myFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +27,7 @@
         android:hint="Search?">
         <requestFocus />
     </EditText>
+
 
     <!-- Loading indicator for user feedback between queries to bing -->
     <ProgressBar

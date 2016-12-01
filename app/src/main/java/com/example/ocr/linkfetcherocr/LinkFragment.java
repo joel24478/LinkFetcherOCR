@@ -50,12 +50,14 @@ public class LinkFragment extends Fragment
     private static final int LINK_LOADER_ID = 1;
 
     /** Adapter for the list of link */
-    private LinkAdapter adapter;
+    private LinkAdapter adapter2;
 
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
     View rootView;
+
+    Activity activity;
 
     /*Jwydo*/
     LnkFtchDbHelper db;
@@ -77,11 +79,13 @@ public class LinkFragment extends Fragment
         setHasOptionsMenu(true);
 
         rootView = inflater.inflate(R.layout.link_list, container, false);
+        activity = getActivity();
+
+        // Find a reference to the {@link ListView} in the layout
         linksListView = (ListView) rootView.findViewById(R.id.list);
 
         emptyStateTextView = (TextView) rootView.findViewById(R.id.empty_view);
         linksListView.setEmptyView(emptyStateTextView);
-
 
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
@@ -91,6 +95,35 @@ public class LinkFragment extends Fragment
         db.insertSomeFakeEntries();
 
         displayListView();
+
+        /*Jwydo * Deprecated to use simplecursor adapter
+        *
+        // Create a new adapter that takes an empty list of links as input
+        //adapter = new LinkAdapter(getActivity(), new ArrayList<Link>());
+
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        linksListView.setAdapter(adapter);
+
+        // Set an item click listener on the ListView, which sends an intent to a web browser
+        // to open a website with more information about the selected link.
+        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Find the current link that was clicked on
+                Link currentLink = adapter.getItem(position);
+
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
+                Uri linkUri = Uri.parse(currentLink.getUrl());
+
+                // Create a new intent to view the Link URI
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, linkUri);
+
+                // Send the intent to launch a new activity
+                startActivity(websiteIntent);
+            }
+        });
+        */
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -107,7 +140,7 @@ public class LinkFragment extends Fragment
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            getActivity().getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
+            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -119,8 +152,6 @@ public class LinkFragment extends Fragment
         }
         return rootView;
     }
-
-
 
 
     @Override
@@ -143,9 +174,9 @@ public class LinkFragment extends Fragment
         // Set empty state text to display "No links found."
         emptyStateTextView.setText(R.string.no_links);
 
+        /* Jwydo depercated
         // Clear the adapter of previous link data
-        /*
-        adapter.clear();
+        //adapter.clear();
 
         // If there is a valid list of {@link Links}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
@@ -178,7 +209,7 @@ public class LinkFragment extends Fragment
     @Override
     public void onLoaderReset(Loader<List<Link>> loader) {
         // Loader reset, so we can clear out our existing data.
-        adapter.clear();
+        adapter2.clear();
     }
 
     @Override
@@ -197,7 +228,6 @@ public class LinkFragment extends Fragment
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void displayListView(){
         Cursor cursor = db.fetchAllInfo();
 
@@ -264,5 +294,4 @@ public class LinkFragment extends Fragment
             }
         });
     }
-
 }

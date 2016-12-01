@@ -2,7 +2,6 @@ package com.example.ocr.linkfetcherocr;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
