@@ -54,7 +54,7 @@ public class LinkAdapter extends ArrayAdapter<Link> {
         linkName.setText(currentLink.getName());
 
         //Get the TextView that holds the tab title of the link
-        TextView linkTabName = (TextView) listItemView.findViewById(R.id.link_tab_title);
+        TextView linkTabName = (TextView) listItemView.findViewById(R.id.link_address);
         //Set the name
         linkName.setText(currentLink.getTabName());
 

@@ -1,6 +1,7 @@
 package com.example.ocr.linkfetcherocr;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,9 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,8 +22,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +57,19 @@ public class LinkFragment extends Fragment
 
     View rootView;
 
-    Activity activity;
+    /*Jwydo*/
+    LnkFtchDbHelper db;
+
+    private SimpleCursorAdapter dataAdapter;
+
+    ListView linksListView;
+
+    LinkCursorAdapter newAdapt;
+
+    private Cursor mCursor;
+
+    private ListView mListView;
+    /*Jwydo*/
 
     public LinkFragment(){
         //Empty constructor
@@ -61,39 +83,20 @@ public class LinkFragment extends Fragment
         setHasOptionsMenu(true);
 
         rootView = inflater.inflate(R.layout.link_list, container, false);
-        activity = getActivity();
-
-        // Find a reference to the {@link ListView} in the layout
-        ListView linksListView = (ListView) rootView.findViewById(R.id.list);
+        linksListView = (ListView) rootView.findViewById(R.id.list);
 
         emptyStateTextView = (TextView) rootView.findViewById(R.id.empty_view);
         linksListView.setEmptyView(emptyStateTextView);
 
-        // Create a new adapter that takes an empty list of links as input
-        adapter = new LinkAdapter(getActivity(), new ArrayList<Link>());
 
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        linksListView.setAdapter(adapter);
+        /*Jwydo*/
+        db = new LnkFtchDbHelper(getActivity());
+        db.open();
+        /*the Db will load correctly and everything, just need to invoke calls like these*/
+        db.deleteAllEntries();
+        db.insertSomeFakeEntries();
 
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected link.
-        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current link that was clicked on
-                Link currentLink = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri linkUri = Uri.parse(currentLink.getUrl());
-
-                // Create a new intent to view the Link URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, linkUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
+        displayListView();
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -110,7 +113,7 @@ public class LinkFragment extends Fragment
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
+            getActivity().getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -122,6 +125,8 @@ public class LinkFragment extends Fragment
         }
         return rootView;
     }
+
+
 
 
     @Override
@@ -145,6 +150,7 @@ public class LinkFragment extends Fragment
         emptyStateTextView.setText(R.string.no_links);
 
         // Clear the adapter of previous link data
+        /*
         adapter.clear();
 
         // If there is a valid list of {@link Links}s, then add them to the adapter's
@@ -152,6 +158,7 @@ public class LinkFragment extends Fragment
         if (links != null && !links.isEmpty()) {
             adapter.addAll(links);
         }
+        */
     }
 
 
@@ -196,4 +203,72 @@ public class LinkFragment extends Fragment
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void displayListView(){
+        Cursor cursor = db.fetchAllInfo();
+
+        // The desired columns to be bound
+        String[] columns = new String[] {
+                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
+                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
+                LnkContract.LinkEntry.COLUMN_FETCHED_URL
+        };
+
+        // the XML defined views which the data will be bound to
+        int[] to = new int[] {
+                R.id.link_name,
+                R.id.link_url,
+                R.id.link_address
+        };
+
+        // create the adapter using the cursor pointing to the desired data
+        //as well as the layout information
+        dataAdapter = new SimpleCursorAdapter(
+                rootView.getContext(), R.layout.link_list_item,
+                cursor,
+                columns,
+                to,
+                0);
+        linksListView.setAdapter(dataAdapter);
+
+
+        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> listView, View view,
+                                    int position, long id) {
+                // Get the cursor, positioned to the corresponding row in the result set
+                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+
+                // Get the state's capital from this row in the database.
+                String name =
+                        cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                Toast.makeText(getActivity().getApplicationContext(),
+                        name, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        EditText myFilter = (EditText) rootView.findViewById(R.id.myFilter);
+        myFilter.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                dataAdapter.getFilter().filter(s.toString());
+            }
+        });
+
+        dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+            public Cursor runQuery(CharSequence constraint) {
+                return db.fetchEntryByUrl(constraint.toString());
+            }
+        });
+    }
+
 }

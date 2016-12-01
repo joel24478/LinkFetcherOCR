@@ -32,11 +32,17 @@
                 tools:text="DropBox"/>
 
             <TextView
-                android:id="@+id/link_tab_title"
+                android:id="@+id/link_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 tools:text="Flyer Information"/>
+            <TextView
+                android:id="@+id/link_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="Url Information"/>
 
         </LinearLayout>
 
