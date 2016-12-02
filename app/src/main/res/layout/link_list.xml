@@ -20,13 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textAppearance="?android:textAppearanceMedium"/>
-    <EditText android:id="@+id/myFilter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Search?">
-        <requestFocus />
-    </EditText>
 
 
     <!-- Loading indicator for user feedback between queries to bing -->

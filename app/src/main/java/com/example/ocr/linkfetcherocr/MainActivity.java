@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +23,7 @@ import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private CategoryAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+        adapter = new CategoryAdapter(this, getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -50,6 +49,27 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        int currentPosition = 0;
+
+        @Override
+        public void onPageSelected(int newPosition) {
+
+            LinkFragmentLifecycle fragmentToShow = (LinkFragmentLifecycle)adapter.getItem(newPosition);
+            fragmentToShow.onResumeFragment();
+
+            LinkFragmentLifecycle fragmentToHide = (LinkFragmentLifecycle)adapter.getItem(currentPosition);
+            fragmentToHide.onPauseFragment();
+
+            currentPosition = newPosition;
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) { }
+
+        public void onPageScrollStateChanged(int arg0) { }
+    };
 
 }
 

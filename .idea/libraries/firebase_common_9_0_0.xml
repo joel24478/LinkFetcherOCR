@@ -1,13 +1,8 @@
 <component name="libraryTable">
   <library name="firebase-common-9.0.0">
     <CLASSES>
-<<<<<<< HEAD:.idea/libraries/play_services_appindexing_8_4_0.xml
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/jars/classes.jar!/" />
-=======
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/res" />
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/jars/classes.jar!/" />
->>>>>>> 339c8d7a592298df8ffa33b2e6ef5af08ffa1308:.idea/libraries/firebase_common_9_0_0.xml
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -40,7 +40,16 @@ import java.util.List;
 
 public class LinkFragment extends Fragment
         implements android.app.LoaderManager.LoaderCallbacks<List<Link>>,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        LinkFragmentLifecycle{
+    @Override
+    public void onPauseFragment(){
+        //something
+    }
+    @Override
+    public void onResumeFragment(){
+        //something
+    }
 
     private static final String REQUEST_URL = "https://api.cognitive.microsoft.com/bing/v5.0/news/?Category=Entertainment";
 
@@ -50,7 +59,8 @@ public class LinkFragment extends Fragment
     private static final int LINK_LOADER_ID = 1;
 
     /** Adapter for the list of link */
-    private LinkAdapter adapter2;
+    //not used
+    //private LinkAdapter adapter2;
 
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
@@ -209,7 +219,7 @@ public class LinkFragment extends Fragment
     @Override
     public void onLoaderReset(Loader<List<Link>> loader) {
         // Loader reset, so we can clear out our existing data.
-        adapter2.clear();
+        //adapter2.clear();
     }
 
     @Override
@@ -243,7 +253,7 @@ public class LinkFragment extends Fragment
         int[] to = new int[] {
                 R.id.link_name,
                 R.id.link_url,
-                R.id.link_address,
+                R.id.link_address
         };
 
         // create the adapter using the cursor pointing to the desired data
@@ -254,6 +264,7 @@ public class LinkFragment extends Fragment
                 columns,
                 to,
                 0);
+
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
@@ -273,27 +284,11 @@ public class LinkFragment extends Fragment
 
             }
         });
-
-        EditText myFilter = (EditText) rootView.findViewById(R.id.myFilter);
-        myFilter.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                dataAdapter.getFilter().filter(s.toString());
-            }
-        });
-
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return db.fetchEntryByUrl(constraint.toString());
             }
         });
     }
+
 }
