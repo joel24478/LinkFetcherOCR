@@ -4,6 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,8 +33,7 @@ public class QueryUtils {
     /* the CASE_INSENSITIVE flag accounts for sites that use uppercase title tags.
     *The DOTALL flag accounts for sites that have line feeds in the title text
     */
-    private static final Pattern TITLE_TAG =
-            Pattern.compile("\\<title>(.*)\\</title>", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+
 
     private static final Pattern FAVICON_TAG =
             Pattern.compile("<link.*?href=\"(.*?\\.ico)\".*?\\/>", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
@@ -77,20 +81,6 @@ public class QueryUtils {
         String tabName = null;
         String date = null;
 
-        try {
-            //if its a valid url then make it the new url, else leave it null
-            if(validLink(pUrl)){
-                url = pUrl;
-                Log.v(LOG_TAG, "Page URL: " + url);
-            }
-
-            tabName = getPageTitle(pUrl);
-            Log.v(LOG_TAG, "Page Title: " + tabName);
-
-        }catch (IOException i){
-            Log.e(LOG_TAG, i.getMessage());
-        }
-
         link = new Link(url, favIcon, name, tabName, date);
 
         return link;
@@ -111,8 +101,70 @@ public class QueryUtils {
     }
 
     /**
-     * @param url link to site
-     * @return Drawable object (favicon) from a url link.
+     * @param url to a site
+     * @return formatted url.
+     */
+    private static String formatUrl(String url){
+
+        String formattedURL = "";
+
+        Pattern pattern = Pattern.compile("http:\\/\\/|https:\\/\\/");
+        Matcher matcher = pattern.matcher(url);
+
+        if(matcher.find()){
+            formattedURL = url;
+        }else{
+            formattedURL = "http://" + url;
+        }
+
+        return formattedURL;
+    }
+
+    /**
+     * @param url to a site
+     * @return formatted url.
+     */
+    private static String baseUrl(String url){
+
+        String formattedURL = "";
+
+        Pattern pattern = Pattern.compile("http:\\/\\/|https:\\/\\/");
+        Matcher matcher = pattern.matcher(url);
+
+        if(matcher.find()){
+            formattedURL = url;
+        }else{
+            formattedURL = "http://" + url;
+        }
+
+        return formattedURL;
+    }
+
+    /**
+     * @param url to a site
+     * @return true if its a base url, and false if its not.
+     */
+    private static boolean checkUrl(String url){
+
+        String formattedURL = "";
+
+        Pattern pattern = Pattern.compile(
+                "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
+                        + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+                        + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(url);
+
+        if(matcher.find()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * @param url to a site
+     * @return Drawable object (favicon) from a url.
      */
     public static Drawable LoadImageFromWebOperations(String url) {
         try {
@@ -124,19 +176,6 @@ public class QueryUtils {
         }
     }
 
-    public static boolean validLink(String pUrl) throws IOException{
-
-        URL u = new URL(pUrl);
-        URLConnection conn = u.openConnection();
-
-        // ContentType is an inner class defined below
-        ContentType contentType = getContentTypeHeader(conn);
-
-        if (!contentType.contentType.equals("text/html"))
-            return false; // don't continue if not HTML
-
-        return true;
-    }
 
     /**
      * @param url the HTML page
@@ -144,169 +183,81 @@ public class QueryUtils {
      * @throws IOException
      */
     public static String getPageTitle(String url) throws IOException {
-        URL u = new URL(url);
-        URLConnection conn = u.openConnection();
 
-        // ContentType is an inner class defined below
-        ContentType contentType = getContentTypeHeader(conn);
-        if (!contentType.contentType.equals("text/html"))
-            return null; // don't continue if not HTML
-        else {
-            // determine the charset, or use the default
-            Charset charset = getCharset(contentType);
-            if (charset == null)
-                charset = Charset.defaultCharset();
+        String formattedURL = formatUrl(url);
 
-            // read the response body, using BufferedReader for performance
-            InputStream in = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
-            int n = 0, totalRead = 0;
-            char[] buf = new char[1024];
-            StringBuilder content = new StringBuilder();
+        Document doc = Jsoup.connect(formattedURL).get();
+        String title = doc.title();
 
-            // read until EOF or first 8192 characters
-            while (totalRead < 8192 && (n = reader.read(buf, 0, buf.length)) != -1) {
-                content.append(buf, 0, n);
-                totalRead += n;
-            }
-            reader.close();
-
-            // extract the title
-            Matcher matcher = TITLE_TAG.matcher(content);
-            if (matcher.find()) {
-            /* replace any occurrences of whitespace (which may
-             * include line feeds and other uglies) as well
-             * as HTML brackets with a space */
-                return matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
-            }
-            else
-                return null;
-        }
+        return title;
     }
 
     /**
      * @param url the HTML page
-     * @return favIcon url (null if document isn't HTML or lacks a favicon)
+     * @return favIcon url (N/A if document isn't HTML or lacks a favicon)
      * @throws IOException
      */
     public static String getPageFavIcon(String url) throws IOException {
 
-        URL u = new URL(url);
-        URLConnection conn = u.openConnection();
+        Log.v(LOG_TAG, "Connecting to " + url);
 
-        // ContentType is an inner class defined below
-        ContentType contentType = getContentTypeHeader(conn);
-        if (!contentType.contentType.equals("text/html"))
-            return null; // don't continue if not HTML
+        String formattedUrl = formatUrl(url);
+        boolean failedConnection = false;
+
+        Log.v(LOG_TAG, "Formatted Url: " + formattedUrl);
+
+        String favicon = "N/A";
+
+        //Connected to the url and get the html file so we can travers the file
+        Document doc = Jsoup.connect(formattedUrl).get();
+        //Travers the file to find the first occurrence of a .ico file
+        Element element = doc.head().select("link[href~=.*\\.ico]").first();
+
+        Log.v(LOG_TAG, "element: " + element);
+
+        //Check to see if it was found
+        if(element == null){
+            Log.e(LOG_TAG, "element not found on page, attempting another method");
+
+            formattedUrl = formattedUrl + "/favicon.ico";
+
+            Log.v(LOG_TAG, "Connecting to " + formattedUrl);
+
+            try{
+                Document doc2 = Jsoup.connect(formattedUrl).get();
+                Log.v(LOG_TAG, "Connected");
+            }catch (IOException e){
+                Log.e(LOG_TAG, "Couldnt connect to " + formattedUrl);
+            }
+
+            return formattedUrl;
+        }
+        //Else the element was found on the page
         else {
-            // determine the charset, or use the default
-            Charset charset = getCharset(contentType);
-            if (charset == null)
-                charset = Charset.defaultCharset();
+            //store that in favicon
+            favicon = element.attr("href");
+        }
 
-            // read the response body, using BufferedReader for performance
-            InputStream in = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
-            int n = 0, totalRead = 0;
-            char[] buf = new char[1024];
-            StringBuilder content = new StringBuilder();
+        //Check to see if favicon url is complete
+        if(!checkUrl(favicon)){
+            //Was most likely missing its base url;
+            favicon = url + favicon;
 
-            // read until EOF or first 8192 characters
-            while (totalRead < 8192 && (n = reader.read(buf, 0, buf.length)) != -1) {
-                content.append(buf, 0, n);
-                totalRead += n;
-            }
-            reader.close();
+            //Check again to see if its a correct url
+            if(!checkUrl(favicon)){
+                //If its not then most sites have it on the root of the site
+                //www.example.com/favicon.ico
+                favicon = url + "/favicon.ico";
 
-            // extract the favicon
-            Matcher matcher = FAVICON_TAG.matcher(content);
-            Matcher matcher2 = FAVICON_TAG2.matcher(content);
-
-            //Pattern for find the Href, so it can extract the link to the favicon
-            Pattern pattern =
-                    Pattern.compile("href=\"(.*?)\"", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
-            Matcher matcher3 = pattern.matcher(content);
-
-            /* url where favicon could be located.
-             * Some times the favicon is stored in the root of the server under
-             * www.domain.xxx/favicon.ico
-             */
-            String favLink = url + "/favicon.ico";
-
-            if (matcher.find() || matcher2.find()) {
-            /* replace any occurrences of whitespace (which may
-             * include line feeds and other uglies) as well
-             * as HTML brackets with a space */
-
-                //Get the href value from the link tag
-                if(matcher3.find()){
-                    favLink = matcher3.group(1).replaceAll("href=\"", "").replaceAll("\"", "").trim();
-                    Log.v(LOG_TAG, "favLink: " + favLink);
-                    return matcher.group(1).replaceAll("[\\s\\<>]+", " ").trim();
-                }
-                else{
-                    Log.e(LOG_TAG, "Error retrieving favicon link");
-                    return null;
+                //Check it one more time to make sure
+                if(!checkUrl(favicon)) {
+                    //The favicon doesn't exist on the site
+                    favicon = "N/A";
                 }
             }
-            else if(validLink(favLink)){
-                return favLink;
-            }
-            else
-                return null;
         }
-    }
 
-    /**
-     * Loops through response headers until Content-Type is found.
-     * @param conn
-     * @return ContentType object representing the value of
-     * the Content-Type header
-     */
-    private static ContentType getContentTypeHeader(URLConnection conn) {
-        int i = 0;
-        boolean moreHeaders = true;
-        do {
-            String headerName = conn.getHeaderFieldKey(i);
-            String headerValue = conn.getHeaderField(i);
-            if (headerName != null && headerName.equals("Content-Type"))
-                return new ContentType(headerValue);
-
-            i++;
-            moreHeaders = headerName != null || headerValue != null;
-        }
-        while (moreHeaders);
-
-        return null;
-    }
-
-    private static Charset getCharset(ContentType contentType) {
-        if (contentType != null && contentType.charsetName != null && Charset.isSupported(contentType.charsetName))
-            return Charset.forName(contentType.charsetName);
-        else
-            return null;
-    }
-
-    /**
-     * Class holds the content type and charset (if present)
-     */
-    private static final class ContentType {
-        private static final Pattern CHARSET_HEADER = Pattern.compile("charset=([-_a-zA-Z0-9]+)", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
-
-        private String contentType;
-        private String charsetName;
-        private ContentType(String headerValue) {
-            if (headerValue == null)
-                throw new IllegalArgumentException("ContentType must be constructed with a not-null headerValue");
-            int n = headerValue.indexOf(";");
-            if (n != -1) {
-                contentType = headerValue.substring(0, n);
-                Matcher matcher = CHARSET_HEADER.matcher(headerValue);
-                if (matcher.find())
-                    charsetName = matcher.group(1);
-            }
-            else
-                contentType = headerValue;
-        }
+        return favicon;
     }
 }
+

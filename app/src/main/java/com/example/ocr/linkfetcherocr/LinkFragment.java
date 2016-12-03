@@ -51,7 +51,7 @@ public class LinkFragment extends Fragment
         //something
     }
 
-    private static final String REQUEST_URL = "https://api.cognitive.microsoft.com/bing/v5.0/news/?Category=Entertainment";
+    private static final String REQUEST_URL = "www.yahoo.com";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
