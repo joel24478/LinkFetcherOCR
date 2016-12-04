@@ -3,417 +3,435 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.10.1/645f1ad2f6f4cbad1cde4c483eae71e4051be6ef/jsoup-1.10.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_b9e33633bb03e7bca424a3833a9d70e8372ee3a7\classes.dex" />
+        sha1="645f1ad2f6f4cbad1cde4c483eae71e4051be6ef">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/jsoup-1.10.1_f9a89f092021b1f236212eb9020973f789ccb5c1/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_147b053c23cf72cb200470c189594075c147d775\classes.dex" />
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.1_904acb7c9d2d6315135a1d95829093a16dab721f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_5835e76f35ece67fa790ee991dff24f0cbc14868\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_cf4d6c281c5d7cf99387473dd538345cc3655643\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_89c21279eb129dcf32654a186068c6a488e78e96\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-vision\9.0.0\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/9.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="f4e85eafa876cd7d7641244867dac3f88d71e866">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-vision-9.0.0_db3a65968f1a1150d11d891dc9f67e3553c57d73\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-vision-9.0.0_3a19a5733d997236b1b0928750a6bee6b5ae75e6/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_df0ec04367da9217236b36097653f85ad854ae15\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c3f8e90c24e78248a3ade4d58478fbcd231022f7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="ad59f7c9be2bbe5322818658d422b168cfaa5d21">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_1c66c6bdeaef0499ffb4d79ed293cba7a084efd1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e0053492cc3edf854083589d652b46f0ffea1eb3">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_32fcdfa57589672e516c6286593d38e46d527bf3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_aa46eac690630d1c9c8546c6851aca1c50efb740\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_65a4ac210b536e394bebc49cb27288cb5ed02aea\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_b54bb0f2b724d800f8ff167de6095b3a706e5615\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_7451b6a9b49ea06a3c699378a254c756adb5c93f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_a3483042b67ecc8d67cb7e946b0d92e18d59c364\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4aa5145d3650c1697ae1cfba0c896b8ccb874a32/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/9.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f4e85eafa876cd7d7641244867dac3f88d71e866">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-vision-9.0.0_3a19a5733d997236b1b0928750a6bee6b5ae75e6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_f4de0745e3323a10d64bd0ca7c4e63d617d3aecc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_4aa5145d3650c1697ae1cfba0c896b8ccb874a32.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_8cc1cde5e8a8947c7d42e3d22bf0af248078405e\classes.dex" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_1ec65465418c72235dea983911568f244b06636d/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.0.0_7616fc815fb42a057bb2b80bc079c56a1b22efa7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-9.0.0_8632f9424a98fb1617345001c1476b47ef6ac915\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_82e952bd3bd3d0b9b670ab15fc488fd47aafd2ae\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_f4de0745e3323a10d64bd0ca7c4e63d617d3aecc/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_9ee8d99bc79cb385c03f88d5b93cf5ec32bf15dc\classes.dex" />
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_a0371b03b65e66982b51b2abc0a2e2ceeb4b7c27/classes.dex" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.2"
-        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_1bc78d48bf3b1e518c7ec9f85070ea7dce76d75f\classes.dex" />
+        sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.0.0_c332ade1fb56e8e03537a68b3e989bab2b25b27f.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_9de0228032d9a025ce2e01fb7e538206d3de8f16\classes.dex" />
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.1_09fa57c88356bc281e2a9c9ffbae44502bdfdcfd.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_09c70c9b72be58c3d122386b34471fe50884cdfd\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.2.1_3e2da9f86064aa2ba31a2f2fd460ef42bb545de5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_29414acaa89b91988c10e12e324da561b7474b8e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_0d86eeb89b156663d9d51d4cc1d740b540ba8700\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="64eefd65ef0e476d6933a5503083cf380d4a539b">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_634901fa542f154ef1b9d326406b870d48736939\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.0\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-9.0.0_4bc0dea3509ba55fe732f0e2e0147c7d8526ebf3\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.0.0_c332ade1fb56e8e03537a68b3e989bab2b25b27f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_24e63dc4c9f869ea9c4c608508ffba0b1f25b233\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_5222839de68c85dd8789abc72f8426a604d4d90d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_09739d771bdf9728ed9e91b17144f127396681f6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_6c51920876b47b44f3ff43c86170cf880c95cd42\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_78e29f04bbc0fd53447932ce0eb65c74dffbcd0d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_edb626bea7bcadbf51c612654cf11d95f96dcbac\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_3364a867c967263f3a0d0bb2c4bc5a01b5ec24ad\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_84ca75dc1b15e9374f10bf9f67c7b38862b65a6d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_408f98567339b0e03edd13e63d7956024f4b6c2b\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_09fa57c88356bc281e2a9c9ffbae44502bdfdcfd/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.0\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-9.0.0_e389de235da49398e5edb006983976150663b9bb\classes.dex" />
+        sha1="a47611ce759bdbe5cb2634a15e5086569df35df0">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_66af00b17ba1bc5dd577220ffdf5871bfb6b00ad/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-9.0.0_d9e0a92ff5cd35d34ce490556a5317051d3bc202.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.0.0_e744d736a92fca1404f8a1b521cad2179950c1e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.1_d6445862aa3bfb8bbdd3e85a37945aa117350221.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.1_a0371b03b65e66982b51b2abc0a2e2ceeb4b7c27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.10.1/645f1ad2f6f4cbad1cde4c483eae71e4051be6ef/jsoup-1.10.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="645f1ad2f6f4cbad1cde4c483eae71e4051be6ef">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/jsoup-1.10.1_f9a89f092021b1f236212eb9020973f789ccb5c1.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_8d5715075cd8ea4ab01912e0838fc439add81de4\classes.dex" />
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.0.0_d9e0a92ff5cd35d34ce490556a5317051d3bc202/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.rmtheis\tess-two\5.4.1\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="921b1c4306b10e7de53574523eb7f7144bd0707f">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.rmtheis-tess-two-5.4.1_843ca6925824108d3ebadf434368a17aa05ab4a4\classes.dex" />
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_d6445862aa3bfb8bbdd3e85a37945aa117350221/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.2.1_904acb7c9d2d6315135a1d95829093a16dab721f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-24.2.1_f2530d4bfcd3149f07748a0d48203d88170b8097.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_f2530d4bfcd3149f07748a0d48203d88170b8097/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_688a5af647b2cd811c042f1bef89b23af48500bd\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_698598a9ac3e9904d83990846ec910b65f79eb22/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_f9b4db22bb4dbbe62c962a81a835fd905ef057c4\classes.dex" />
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.0.0_e744d736a92fca1404f8a1b521cad2179950c1e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.1_698598a9ac3e9904d83990846ec910b65f79eb22.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_0b20b8d5b28d89546e87ec0d11463ad0e5132878\classes.dex" />
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.1_8bb2d5508afbc7379e90ce32617f8f9c8d21ec5d/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.2.1_5555ba3c9f3aa64c1e42329c95cb405400d6ecea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-24.2.1_8bb2d5508afbc7379e90ce32617f8f9c8d21ec5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_f91b40a85085a5e332c17a070631a61ecc8cffc3.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_cd492fab087db2c9d0dd0d6c99d11fe44d274f72/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_f91b40a85085a5e332c17a070631a61ecc8cffc3/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.2.1_cd492fab087db2c9d0dd0d6c99d11fe44d274f72.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_e04203f0676748a541289e59abb499f9073a9595\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_5555ba3c9f3aa64c1e42329c95cb405400d6ecea/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.1_ef715a53a6854674cc8503df083d7de73246e8b7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.2.1_1ec65465418c72235dea983911568f244b06636d.jar" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="57bf590861762940d03f21a62c85ed3f640b4309">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_42a7558a622a70662996d90af793c3d17eb4f52a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_ef715a53a6854674cc8503df083d7de73246e8b7/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-24.2.1_1e1ad503c7fa4726a824494be7f5feb7d7e50148.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-9.0.0_c7ffe2a654912fa82b384b96ccb5ef39debea6fc.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_1e1ad503c7fa4726a824494be7f5feb7d7e50148/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.0.0_c7ffe2a654912fa82b384b96ccb5ef39debea6fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_30b48fa7fe56dd1016f8d82efce8e4c0412c5ff1/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_5a7f56995eea519062ff6ccb3d97e482810c1d39.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_87e24578475c3bf4072d92e06bc2e87141edad70\classes.dex" />
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_5a7f56995eea519062ff6ccb3d97e482810c1d39/classes.dex" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.2"
-        sha1="ce6a4f5a9e6aa0bcfd5cc4c8f293452e71a2c721">
-        <dex dex="C:\Users\jwydo\AndroidStudioProjects\LFOCRJwydo\MergeDatabase\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_8349842130496b721165faf6989d8054f02d3401\classes.dex" />
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_30b48fa7fe56dd1016f8d82efce8e4c0412c5ff1.jar" />
     </item>
 
 </items>
