@@ -51,7 +51,7 @@ public class LinkFragment extends Fragment
         //something
     }
 
-    private static final String REQUEST_URL = "www.yahoo.com";
+    private static final String REQUEST_URL = "www.google.com";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.

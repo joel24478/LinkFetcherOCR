@@ -42,17 +42,19 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
             return null;
         }
 
-        String test = "Failed";
+//        String test = "Failed";
+//
+//        try {
+//
+//            test = QueryUtils.getPageFavIcon(url);
+//
+//        }catch(IOException e){
+//            Log.e(LOG_TAG, e.getMessage());
+//        }
+//
+//        Log.v(LOG_TAG, "FavIcon: " + test);
 
-        try {
-
-            test = QueryUtils.getPageFavIcon(url);
-
-        }catch(IOException e){
-            Log.e(LOG_TAG, e.getMessage());
-        }
-
-        Log.v(LOG_TAG, "FavIcon: " + test);
+        QueryUtils.createLink(url);
 
         // Perform the network request, parse the response, and extract a list of links.
         List<Link> links = null;
