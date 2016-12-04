@@ -64,12 +64,16 @@ db is now created with a single take named lnkftchr. The database also functions
 
 ####Picture show of the app####
 1) App gui
+
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2502_zps2qofsgag.jpg)
 2) Clicking on camera
+
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2503_zpsy4vlmego.jpg)
 3) paper of text that it is grabbing from
+
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2505_zps65ygirww.jpg)
 4) how the app looks once text is read
+
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2504_zpsrozdzqlk.jpg)
 
 
