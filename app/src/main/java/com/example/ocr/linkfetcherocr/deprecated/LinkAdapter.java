@@ -49,7 +49,7 @@ public class LinkAdapter extends ArrayAdapter<Link> {
         //Get the ImageView that holds the image of the link
         ImageView linkImage = (ImageView) listItemView.findViewById(R.id.link_image);
         //Set the image
-        linkImage.setImageBitmap(currentLink.getFavicon());
+        //linkImage.setImageBitmap(currentLink.getFavicon());
 
         //Get the TextView that holds the name of the link
         TextView linkName = (TextView) listItemView.findViewById(R.id.link_name);

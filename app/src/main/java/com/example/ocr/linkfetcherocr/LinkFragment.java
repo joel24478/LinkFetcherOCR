@@ -2,6 +2,8 @@ package com.example.ocr.linkfetcherocr;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,10 @@ import android.widget.Toast;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +58,7 @@ public class LinkFragment extends Fragment
         //something
     }
 
-    private static final String REQUEST_URL = "www.yahoo.com";
+    private static final String REQUEST_URL = "www.google.com";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
@@ -106,34 +113,6 @@ public class LinkFragment extends Fragment
 
         displayListView();
 
-        /*Jwydo * Deprecated to use simplecursor adapter
-        *
-        // Create a new adapter that takes an empty list of links as input
-        //adapter = new LinkAdapter(getActivity(), new ArrayList<Link>());
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        linksListView.setAdapter(adapter);
-
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected link.
-        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current link that was clicked on
-                Link currentLink = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri linkUri = Uri.parse(currentLink.getUrl());
-
-                // Create a new intent to view the Link URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, linkUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
-        */
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -241,12 +220,12 @@ public class LinkFragment extends Fragment
     private void displayListView(){
         Cursor cursor = db.fetchAllInfo();
 
+
         // The desired columns to be bound
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
                 LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_IMAGE
+                LnkContract.LinkEntry.COLUMN_FETCHED_URL
         };
 
         // the XML defined views which the data will be bound to
@@ -289,6 +268,29 @@ public class LinkFragment extends Fragment
                 return db.fetchEntryByUrl(constraint.toString());
             }
         });
+
+                /*gets and sets bitmap for each link*/
+        ImageView newImgView = (ImageView)activity.findViewById(R.id.link_image);
+        for(int i=0;i<dataAdapter.getCount();i++){
+            dataAdapter.getItem(i);
+        }
+        //newImgView.setImageBitmap();
+
+    }
+    /*http://stackoverflow.com/questions/14513695/creating-a-url-string-to-get-a-favicon-in-java*/
+    public static Bitmap getBitmapFromURL(URL src) {
+        try {
+            URL url = src;
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

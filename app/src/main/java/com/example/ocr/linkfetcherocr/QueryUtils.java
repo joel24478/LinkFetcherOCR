@@ -1,24 +1,19 @@
 package com.example.ocr.linkfetcherocr;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 
+import android.util.Log;
+import com.squareup.picasso.Picasso;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,15 +70,37 @@ public class QueryUtils {
     public static Link createLink(String pUrl){
         Link link;
 
-        String url = null;
-        Bitmap favIcon = null;
-        String name = null;
-        String tabName = null;
-        String date = null;
+        if(!checkUrl(pUrl)){
+            Log.e(LOG_TAG, "Link your trying to create is invalid/nInvalid URL: " + pUrl);
+            return null;
+        }
 
-        link = new Link(url, favIcon, name, tabName, date);
+        String formattedUrl = formatUrl(pUrl);
 
-        return link;
+        String url = formattedUrl;
+
+        try{
+            String favIcon = getPageFavIcon(url);
+            String name = null;
+            String title = getPageTitle(url);
+            String date = getCurrentDate();
+
+            try{
+                name = getPageName(url);
+            }catch (URISyntaxException e){
+                Log.e(LOG_TAG, e.getMessage());
+                return null;
+            }
+
+            Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
+
+            link = new Link(url, favIcon, name, title, date);
+
+            return link;
+        }catch (IOException e){
+            Log.e(LOG_TAG, e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -163,33 +180,43 @@ public class QueryUtils {
     }
 
     /**
+     * @return current date.
+     */
+    private static String getCurrentDate(){
+
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd/yyyy");
+        String formattedDate = df.format(c.getTime());
+
+        return formattedDate;
+    }
+
+    /**
      * @param url to a site
      * @return Drawable object (favicon) from a url.
      */
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable drawable = Drawable.createFromStream(is, "src name");
-            return drawable;
-        } catch (Exception e) {
-            return null;
-        }
+    public static String getPageName(String url) throws URISyntaxException {
+        URI uri = new URI(url);
+        String domain = uri.getHost();
+        domain = domain.replace("www\\.", "");
+        return domain;
     }
 
 
     /**
-     * @param url the HTML page
-     * @return title text (null if document isn't HTML or lacks a title tag)
+     * @param url of HTML page
+     * @return title of HTML page
      * @throws IOException
      */
     public static String getPageTitle(String url) throws IOException {
 
         String formattedURL = formatUrl(url);
 
-        Document doc = Jsoup.connect(formattedURL).get();
-        String title = doc.title();
+        Document doc = Jsoup.connect(url).get();
 
-        return title;
+        return doc.title();
     }
 
     /**
@@ -213,7 +240,7 @@ public class QueryUtils {
         //Travers the file to find the first occurrence of a .ico file
         Element element = doc.head().select("link[href~=.*\\.ico]").first();
 
-        Log.v(LOG_TAG, "element: " + element);
+        //Log.v(LOG_TAG, "element: " + element);
 
         //Check to see if it was found
         if(element == null){
@@ -227,7 +254,7 @@ public class QueryUtils {
                 Document doc2 = Jsoup.connect(formattedUrl).get();
                 Log.v(LOG_TAG, "Connected");
             }catch (IOException e){
-                Log.e(LOG_TAG, "Couldnt connect to " + formattedUrl);
+                Log.e(LOG_TAG, "Couldn't connect to " + formattedUrl);
             }
 
             return formattedUrl;
