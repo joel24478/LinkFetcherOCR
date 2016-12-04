@@ -77,4 +77,3 @@ db is now created with a single take named lnkftchr. The database also functions
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2504_zpsrozdzqlk.jpg)
 
 
-
