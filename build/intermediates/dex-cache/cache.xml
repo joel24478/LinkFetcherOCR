@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="815e36b288717ad8c183ac321cbe97a09d5ef068">
+        sha1="75cd9ad520d5a54d6551da03b716355ab2ffccc6">
         <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_197645a728af1226258e4b381fa9233b8ed9bde4\classes.dex" />
     </item>
     <item
@@ -205,7 +205,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="fc1974d5d0f18d46f058cf3195c12a0bba4fa039">
+        sha1="3a458dbbcf54196fbf6fb842d7e9cedc974f5fac">
         <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a7866bc261c5a5fec9e05c4ece8f7fd676631e4b\classes.dex" />
     </item>
     <item

@@ -33,7 +33,8 @@
         </activity>
         <activity
             android:name="com.example.ocr.linkfetcherocr.CameraActivity"
-            android:label="camera_activity" >
+            android:label="camera_activity"
+            android:parentActivityName="com.example.ocr.linkfetcherocr.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

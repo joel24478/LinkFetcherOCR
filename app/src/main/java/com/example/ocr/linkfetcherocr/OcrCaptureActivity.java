@@ -49,6 +49,8 @@ import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
 
+import static android.R.attr.data;
+
 /**
  * Activity for the multi-tracker app.  This app detects text and displays the value with the
  * rear facing camera. During detection overlay graphics are drawn to indicate the position,
@@ -337,6 +339,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         else {
             Log.d(TAG,"no text detected");
         }
+
         return text != null;
     }
 

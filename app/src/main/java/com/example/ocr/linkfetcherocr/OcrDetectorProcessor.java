@@ -15,6 +15,7 @@
  */
 package com.example.ocr.linkfetcherocr;
 
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.ocr.linkfetcherocr.camera.GraphicOverlay;
@@ -49,6 +50,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
             mGraphicOverlay.add(graphic);
         }
+        //Log.d("text?????????????", items.toString());
     }
 
     /**

@@ -16,10 +16,12 @@
 
 package com.example.ocr.linkfetcherocr;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -33,7 +35,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
  * Main activity demonstrating how to pass extra parameters to an activity that
  * recognizes text.
  */
-public class CameraActivity extends Activity implements View.OnClickListener {
+public class CameraActivity extends ActionBarActivity implements View.OnClickListener {
 
     // Use a compound button so either checkbox or switch widgets work.
     private CompoundButton autoFocus;
@@ -56,6 +58,10 @@ public class CameraActivity extends Activity implements View.OnClickListener {
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
 
         findViewById(R.id.read_text).setOnClickListener(this);
+        // my_child_toolbar is defined in the layout file
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     /**
@@ -99,13 +105,15 @@ public class CameraActivity extends Activity implements View.OnClickListener {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String text = null;
         if(requestCode == RC_OCR_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
-                    String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
+                    text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
                     statusMessage.setText(R.string.ocr_success);
                     textValue.setText(text);
                     Log.d(TAG, "Text read: " + text);
+                    // Joel the "text" is right here I could just return here
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");
@@ -118,5 +126,6 @@ public class CameraActivity extends Activity implements View.OnClickListener {
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+        Log.d("hey12222", text);
     }
 }
