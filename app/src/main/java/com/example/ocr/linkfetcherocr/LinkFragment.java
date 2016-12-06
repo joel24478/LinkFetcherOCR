@@ -151,7 +151,7 @@ public class LinkFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL);
+        return new LinkLoader(getContext(), REQUEST_URL,db);
     }
 
     @Override

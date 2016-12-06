@@ -1,7 +1,10 @@
 package com.example.ocr.linkfetcherocr;
 
 
+import android.content.Context;
 import android.util.Log;
+
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 import com.squareup.picasso.Picasso;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,6 +17,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,12 +32,11 @@ public class QueryUtils {
     /* the CASE_INSENSITIVE flag accounts for sites that use uppercase title tags.
     *The DOTALL flag accounts for sites that have line feeds in the title text
     */
-
-
     private static final Pattern FAVICON_TAG =
             Pattern.compile("<link.*?href=\"(.*?\\.ico)\".*?\\/>", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
     private static final Pattern FAVICON_TAG2 =
             Pattern.compile("<link.*?rel=\"(.*?icon)\".*?\\/>", Pattern.CASE_INSENSITIVE|Pattern.DOTALL);
+
 
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
@@ -49,30 +52,23 @@ public class QueryUtils {
 //    public static List<Link> fetchLinks() {
 //
 //
-//        // Perform HTTP request to the URL and receive a JSON response back
-//        String jsonResponse = null;
-//        try {
-//            jsonResponse = makeHttpRequest(url);
-//        } catch (IOException e) {
-//            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
-//        }
 //
-//        // Extract relevant fields from the JSON response and create a list of {@link Link}s
-//        List<Link> links = extractFeatureFromJson(jsonResponse);
+//        //Get the data from the database and create a list of {@link Link}s
+//        List<Link> links = createLink();
 //
-//        // Return the list of {@link Article}s
+//        // Return the list of {@link Link}s
 //        return links;
 //    }
 
     /**
-     * Returns a list of {@link Link} objects from the database.
+     * Create a URL entry in the database.
+     * @param pUrl the url for the site
+     *
      */
-    public static Link createLink(String pUrl){
-        Link link;
+    public static void createLink(String pUrl, LnkFtchDbHelper pDb){
 
         if(!checkUrl(pUrl)){
             Log.e(LOG_TAG, "Link your trying to create is invalid/nInvalid URL: " + pUrl);
-            return null;
         }
 
         String formattedUrl = formatUrl(pUrl);
@@ -89,35 +85,30 @@ public class QueryUtils {
                 name = getPageName(url);
             }catch (URISyntaxException e){
                 Log.e(LOG_TAG, e.getMessage());
-                return null;
             }
 
             Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
 
-            link = new Link(url, favIcon, name, title, date);
-
-            return link;
+            //Create an entry in the database
+            pDb.createEntry(title, name, url, favIcon);
         }catch (IOException e){
             Log.e(LOG_TAG, e.getMessage());
-            return null;
         }
     }
 
     /**
-     * @param stringUrl link to site
-     * @return URL object from the given string URL.
+     * Create a Email entry in the database
+     * @param pEmail the email to add to the
+     * @param pDb the database to place the entry in
+     * @return void.
      */
-    private static URL createUrl(String stringUrl) {
-        URL url = null;
-        try {
-            url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Problem building the URL ", e);
-        }
-        return url;
+    private static void createEmail(String pEmail, LnkFtchDbHelper pDb) {
+
+        //pDb.createEntry()
     }
 
     /**
+     * Format a url so that it has http:// or else you'll get errors on trying to connect
      * @param url to a site
      * @return formatted url.
      */
@@ -138,26 +129,7 @@ public class QueryUtils {
     }
 
     /**
-     * @param url to a site
-     * @return formatted url.
-     */
-    private static String baseUrl(String url){
-
-        String formattedURL = "";
-
-        Pattern pattern = Pattern.compile("http:\\/\\/|https:\\/\\/");
-        Matcher matcher = pattern.matcher(url);
-
-        if(matcher.find()){
-            formattedURL = url;
-        }else{
-            formattedURL = "http://" + url;
-        }
-
-        return formattedURL;
-    }
-
-    /**
+     * Check to see if its a valid url
      * @param url to a site
      * @return true if its a base url, and false if its not.
      */
@@ -180,6 +152,7 @@ public class QueryUtils {
     }
 
     /**
+     * Get the current date
      * @return current date.
      */
     private static String getCurrentDate(){
@@ -194,6 +167,7 @@ public class QueryUtils {
     }
 
     /**
+     * Get the HTML's name
      * @param url to a site
      * @return Drawable object (favicon) from a url.
      */
@@ -206,6 +180,7 @@ public class QueryUtils {
 
 
     /**
+     * Get a HTML's title tag off a url
      * @param url of HTML page
      * @return title of HTML page
      * @throws IOException
@@ -220,6 +195,7 @@ public class QueryUtils {
     }
 
     /**
+     * Get a HTML's favicon off a url
      * @param url the HTML page
      * @return favIcon url (N/A if document isn't HTML or lacks a favicon)
      * @throws IOException
