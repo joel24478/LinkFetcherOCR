@@ -30,10 +30,15 @@ public class LnkProvider extends ContentProvider {
 
 
     public static final String LOG_TAG = LnkProvider.class.getSimpleName();
-    /** URI matcher code for the content URI for the pets table */
     private static final int LINK = 100;
-    /** URI matcher code for the content URI for a single pet in the pets table */
     private static final int LINK_ID = 101;
+
+    private static final int PHONE = 200;
+    private static final int PHONE_ID = 201;
+
+    private static  final int EMAIL = 300;
+    private static final int EMAIL_ID = 301;
+
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -41,6 +46,11 @@ public class LnkProvider extends ContentProvider {
     static {
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_LINKS, LINK);
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_LINKS + "/#", LINK_ID);
+        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_PHONE, PHONE);
+        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_PHONE + "/#", PHONE_ID);
+        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_EMAIL, EMAIL);
+        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_EMAIL + "/#", EMAIL_ID);
+
     }
 
     /** Database helper object */
@@ -66,7 +76,7 @@ public class LnkProvider extends ContentProvider {
         switch (match) {
             case LINK:
 
-                cursor = database.query(LinkEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(LinkEntry.TABLE_NAME_LINKS, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             case LINK_ID:
@@ -74,9 +84,19 @@ public class LnkProvider extends ContentProvider {
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
 
 
-                cursor = database.query(LinkEntry.TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(LinkEntry.TABLE_NAME_LINKS, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
+            /*
+            case PHONE:
+                break;
+            case PHONE_ID:
+                break;
+            case EMAIL:
+                break;
+            case EMAIL_ID:
+                break;
+                */
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
@@ -103,19 +123,19 @@ public class LnkProvider extends ContentProvider {
 
     private Uri insertLink(Uri uri, ContentValues values) {
         // Check that the name is not null
-        String name = values.getAsString(LinkEntry.COLUMN_FETCHED_NAME);
+        String name = values.getAsString(LinkEntry.COLUMN_LINK_NAME);
         if (name == null) {
             throw new IllegalArgumentException("Link requires a name");
         }
 
         // Check that the email Address
-        String ftchTabName = values.getAsString(LinkEntry.COLUMN_FETCHED_TAB_NAME);
+        String ftchTabName = values.getAsString(LinkEntry.COLUMN_LINK_TAB_NAME);
         if (ftchTabName == null) {
             throw new IllegalArgumentException("Link requires valid tab name");
         }
 
         // check bse url
-        String ftchUrl = values.getAsString(LinkEntry.COLUMN_FETCHED_URL);
+        String ftchUrl = values.getAsString(LinkEntry.COLUMN_LINK_URL);
         if (ftchUrl == null || !LinkEntry.isValidBaseUrl(ftchUrl)) {
             throw new IllegalArgumentException("Link requires valid Url");
         }
@@ -123,7 +143,7 @@ public class LnkProvider extends ContentProvider {
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        long id = database.insert(LinkEntry.TABLE_NAME, null, values);
+        long id = database.insert(LinkEntry.TABLE_NAME_LINKS, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
@@ -154,23 +174,23 @@ public class LnkProvider extends ContentProvider {
     }
 
     private int updateLink(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        if (values.containsKey(LinkEntry.COLUMN_FETCHED_NAME)) {
-            String name = values.getAsString(LinkEntry.COLUMN_FETCHED_NAME);
+        if (values.containsKey(LinkEntry.COLUMN_LINK_NAME)) {
+            String name = values.getAsString(LinkEntry.COLUMN_LINK_NAME);
             if (name == null) {
                 throw new IllegalArgumentException("Link requires a name");
             }
         }
 
-        if (values.containsKey(LinkEntry.COLUMN_FETCHED_FAVICON)) {
-            String favIcon = values.getAsString(LinkEntry.COLUMN_FETCHED_FAVICON);
+        if (values.containsKey(LinkEntry.COLUMN_LINK_FAVICON)) {
+            String favIcon = values.getAsString(LinkEntry.COLUMN_LINK_FAVICON);
             if (favIcon == null) {
                 throw new IllegalArgumentException("Link requires valid favIcon");
             }
         }
 
-        if (values.containsKey(LinkEntry.COLUMN_FETCHED_URL)) {
+        if (values.containsKey(LinkEntry.COLUMN_LINK_URL)) {
             //check valid url
-            String fURL = values.getAsString(LinkEntry.COLUMN_FETCHED_URL);
+            String fURL = values.getAsString(LinkEntry.COLUMN_LINK_URL);
             if (fURL != null && LinkEntry.isValidBaseUrl(fURL)) {
                 throw new IllegalArgumentException("Link requires valid URL");
             }
@@ -183,7 +203,7 @@ public class LnkProvider extends ContentProvider {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Perform the update on the database and get the number of rows affected
-        int rowsUpdated = database.update(LinkEntry.TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated = database.update(LinkEntry.TABLE_NAME_LINKS, values, selection, selectionArgs);
 
         // If 1 or more rows were updated, then notify all listeners that the data at the
         // given URI has changed
@@ -207,13 +227,13 @@ public class LnkProvider extends ContentProvider {
         switch (match) {
             case LINK:
                 // Delete all rows that match the selection and selection args
-                rowsDeleted = database.delete(LinkEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(LinkEntry.TABLE_NAME_LINKS, selection, selectionArgs);
                 break;
             case LINK_ID:
                 // Delete a single row given by the ID in the URI
                 selection = LinkEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                rowsDeleted = database.delete(LinkEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(LinkEntry.TABLE_NAME_LINKS, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);

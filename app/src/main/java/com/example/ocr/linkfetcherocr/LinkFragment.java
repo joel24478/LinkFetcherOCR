@@ -109,7 +109,7 @@ public class LinkFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
         db.insertSomeFakeEntries();
 
         displayListView();
@@ -219,23 +219,23 @@ public class LinkFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllLinkInfo();
 
 
         // The desired columns to be bound
         String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_TAB_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_FETCHED_FAVICON,
-                LnkContract.LinkEntry.COLUMN_FETCHED_TIME
+                LnkContract.LinkEntry.COLUMN_LINK_NAME,
+                LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME,
+                LnkContract.LinkEntry.COLUMN_LINK_URL,
+                LnkContract.LinkEntry.COLUMN_LINK_FAVICON,
+                LnkContract.LinkEntry.COLUMN_LINK_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
                 R.id.link_name,
                 R.id.link_url,
-                R.id.link_address,
+                R.id.link_address
 
         };
         // create the adapter using the cursor pointing to the desired data
@@ -250,9 +250,10 @@ public class LinkFragment extends Fragment
             public boolean setViewValue(View view, Cursor cursor, int i){
                 //hardcode favicon
                 if (i == 3) {
-                    ImageView favIconView = (ImageView) view;
-                    favIconView.setImageBitmap(null);
-                    String favicon = Picasso.with(mCtx).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+                    Context tempC = activity.getBaseContext().getApplicationContext();
+                    ImageView favIconView = (ImageView) rootView.findViewById(R.id.link_image);
+                    //favIconView.setImageBitmap(null);
+                    Picasso.with(tempC).load("http://i.imgur.com/DvpvklR.png").into(favIconView);
 
 
 
@@ -283,7 +284,7 @@ public class LinkFragment extends Fragment
         });
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchLinkByUrl(constraint.toString());
             }
         });
 

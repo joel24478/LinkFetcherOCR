@@ -47,14 +47,31 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     public  final String LOG_TAG = LnkFtchDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "lnkFtchr.db";
-    private static final int DATABASE_VERSION = 4;
-    public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME + "("
+    private static final int DATABASE_VERSION = 5;
+
+    /*SQL to create the tables*/
+    /*Link*/
+    public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME_LINKS + "("
         + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_NAME + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_TAB_NAME + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_FAVICON + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_URL + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_TIME + " TEXT);";
+        + LnkContract.LinkEntry.COLUMN_LINK_NAME + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_LINK_FAVICON + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_LINK_URL + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_LINK_TIME + " TEXT);";
+
+    /*Phone*/
+    public static final String SQL_CREATE_PHONE_TABLE ="CREATE TABLE " + LinkEntry.TABLE_NAME_PHONE+ "("
+        + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
+        + LinkEntry.COLUMN_PHONE_NAME + " TEXT, "
+        + LinkEntry.COLUMN_PHONE_PHONENUM + " TEXT, "
+        + LinkEntry.COLUMN_EMAIL_TIME + " TEXT);";
+
+    /*Email*/
+    public static final String SQL_CREATE_EMAIL_TABLE = "CREATE TABLE " + LinkEntry.TABLE_NAME_EMAIL + "("
+            + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
+            + LinkEntry.COLUMN_EMAIL_NAME + " TEXT, "
+            + LinkEntry.COLUMN_EMAIL_EM + " TEXT, "
+            + LinkEntry.COLUMN_PHONE_TIME + " TEXT);";
 
 
     public LnkFtchDbHelper(Context context) {
@@ -64,13 +81,18 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        /* on a new creation create all of our tables*/
         db.execSQL(SQL_CREATE_LINKS_TABLE);
+        db.execSQL(SQL_CREATE_PHONE_TABLE);
+        db.execSQL(SQL_CREATE_EMAIL_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(newVersion>oldVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_LINKS);
+            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_PHONE);
+            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_EMAIL);
             onCreate(db);
         }
     }
@@ -87,71 +109,83 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long createEntry(String name, String tabName, String url, String photoUrl){
+    public long createLinkEntry(String name, String tabName, String url, String photoUrl, String time){
         ContentValues initVals = new ContentValues();
         //Ref: @http://stackoverflow.com/questions/6341776/how-to-save-bitmap-in-database
-        initVals.put(LinkEntry.COLUMN_FETCHED_NAME, name);
-        initVals.put(LinkEntry.COLUMN_FETCHED_TAB_NAME, tabName);
-        initVals.put(LinkEntry.COLUMN_FETCHED_FAVICON, photoUrl);
-        initVals.put(LinkEntry.COLUMN_FETCHED_URL, url);
-        return mDb.insert(LinkEntry.TABLE_NAME, null, initVals);
+        /*for a link*/
+        initVals.put(LinkEntry.COLUMN_LINK_NAME, name);
+        initVals.put(LinkEntry.COLUMN_LINK_TAB_NAME, tabName);
+        initVals.put(LinkEntry.COLUMN_LINK_FAVICON, photoUrl);
+        initVals.put(LinkEntry.COLUMN_LINK_URL, url);
+        initVals.put(LinkEntry.COLUMN_LINK_TIME, time);
+        return mDb.insert(LinkEntry.TABLE_NAME_LINKS, null, initVals);
     }
-    /* Jwydo
-     * to insert our new data to database
-     * Takes a list of "Link"*/
-    public void insertAllLinks(List<Link> allLinks) {
-        Iterator<Link> iterLinks = allLinks.iterator();
-        while (iterLinks.hasNext()) {
-            createEntry(iterLinks.next().getName(),
-                    iterLinks.next().getName(),
-                    iterLinks.next().getUrl(),
-                    iterLinks.next().getFavicon().toString());
-        }
+    /*For inserting a entry to the Phone table*/
+    public long createPhoneEntry(String name, String phnNmb, String time){
+        ContentValues initVals = new ContentValues();
+        initVals.put(LinkEntry.COLUMN_PHONE_NAME, name);
+        initVals.put(LinkEntry.COLUMN_PHONE_PHONENUM, phnNmb);
+        initVals.put(LinkEntry.COLUMN_PHONE_TIME, time);
+        return mDb.insert(LinkEntry.TABLE_NAME_PHONE, null, initVals);
+    }
+
+    /*For inserting a entry to the Phone Table*/
+    public long createEmailEntry(String name, String email, String time){
+        ContentValues initVals = new ContentValues();
+        initVals.put(LinkEntry.COLUMN_EMAIL_NAME, name);
+        initVals.put(LinkEntry.COLUMN_EMAIL_EM, email);
+        initVals.put(LinkEntry.COLUMN_EMAIL_TIME, time);
+        return mDb.insert(LinkEntry.TABLE_NAME_EMAIL, null, initVals);
     }
 
 
-    public boolean deleteAllEntries(){
+
+    public boolean deleteAllEntries(String tableName){
         int doneDeed = 0;
-        doneDeed = mDb.delete(LinkEntry.TABLE_NAME, null, null);
+        doneDeed = mDb.delete(tableName, null, null);
         return doneDeed > 0;
     }
     /*Jwydo
-     *Select statements where column is like inpurl
+     *Select statements where column is like inpurl, Only works for the links table
      */
-    public Cursor fetchEntryByUrl(String inpUrl) throws SQLException{
+    public Cursor fetchLinkByUrl(String inpUrl) throws SQLException{
         Cursor nmCursor = null;
         if (inpUrl == null || inpUrl.length() == 0) {
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[]{
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON, LinkEntry.COLUMN_LINK_TIME
             }, null, null, null, null, null);
         }
         else{
-            nmCursor = mDb.query(true, LinkEntry.TABLE_NAME, new String[] {
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
-            }, LinkEntry.COLUMN_FETCHED_URL + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
+            nmCursor = mDb.query(true, LinkEntry.TABLE_NAME_LINKS, new String[] {
+                    LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON, LinkEntry.COLUMN_LINK_TIME
+            }, LinkEntry.COLUMN_LINK_URL + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
         }
         if (nmCursor != null){
             nmCursor.moveToFirst();
         }
         return nmCursor;
     }
-    public Cursor fetchEntryByName(String inpUrl) throws SQLException {
+
+    /*Jwydo
+     *set up to retrieve a user by their given name in the LnkFtchr table */
+    public Cursor fetchLinkByName(String inpUrl) throws SQLException {
         Cursor nmCursor = null;
         if (inpUrl == null || inpUrl.length() == 0) {
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[]{
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON, LinkEntry.COLUMN_LINK_TIME
             }, null, null, null, null, null);
         } else {
-            nmCursor = mDb.query(true, LinkEntry.TABLE_NAME, new String[] {
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
-            }, LinkEntry.COLUMN_FETCHED_NAME + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
+            nmCursor = mDb.query(true, LinkEntry.TABLE_NAME_LINKS, new String[] {
+                    LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON, LinkEntry.COLUMN_LINK_TIME
+            }, LinkEntry.COLUMN_LINK_NAME + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
 
         }
         return nmCursor;
     }
-    public Cursor fetchAllInfo(){
-        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[] {
-                LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
+    /*Fetches all link info*/
+    public Cursor fetchAllLinkInfo(){
+        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[] {
+                LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON
         },null, null, null, null, null);
         if(nmCursor != null){
             nmCursor.moveToFirst();
@@ -159,35 +193,102 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         return nmCursor;
     }
 
-    public void insertSomeFakeEntries(){
-        createEntry("Jonathan", "jwydola@hotmail.com", "http://www.facebook.com","something");
-        createEntry("Katherine", "kObert@obert.net", "http://www.reddit.com", "something");
-        createEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "some");
+    /*fetches by phone numbers*/
+    public Cursor fetchPhoneByNumber(String number){
+        Cursor nmCursor;
+        if(number == null || number.length() == 0){
+            nmCursor= mDb.query(LinkEntry.TABLE_NAME_PHONE, new String[] {
+                    LinkEntry.PHONE_ID, LinkEntry.COLUMN_PHONE_NAME, LinkEntry.COLUMN_PHONE_PHONENUM, LinkEntry.COLUMN_PHONE_TIME
+            }, null, null, null, null, null);
+        } else {
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_PHONE, new String[]{
+                    LinkEntry.PHONE_ID, LinkEntry.COLUMN_PHONE_NAME, LinkEntry.COLUMN_PHONE_PHONENUM, LinkEntry.COLUMN_PHONE_TIME
+            }, LinkEntry.COLUMN_PHONE_PHONENUM + "like '&'" + number + "'&'", null, null, null, null, null);
+        }
+        if (nmCursor != null){
+            nmCursor.moveToFirst();
+        }
+        return nmCursor;
+    }
+    /*fetches by phone name*/
+    public Cursor fetchPhoneByName(String name){
+        Cursor nmCursor;
+        if(name == null || name.length() == 0){
+            nmCursor= mDb.query(LinkEntry.TABLE_NAME_PHONE, new String[] {
+                    LinkEntry.PHONE_ID, LinkEntry.COLUMN_PHONE_NAME, LinkEntry.COLUMN_PHONE_PHONENUM, LinkEntry.COLUMN_PHONE_TIME
+            }, null, null, null, null, null);
+        } else{
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_PHONE, new String[]{
+                    LinkEntry.PHONE_ID, LinkEntry.COLUMN_PHONE_NAME, LinkEntry.COLUMN_PHONE_PHONENUM, LinkEntry.COLUMN_PHONE_TIME
+            }, LinkEntry.COLUMN_PHONE_NAME + "like '&'" + name + "'&'", null, null, null, null, null);
+        }
+        if(nmCursor != null){
+            nmCursor.moveToFirst();
+        }
+        return nmCursor;
+    }
+    /*Fetches all phone info*/
+    public Cursor fetchAllPhoneInfo(){
+        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_PHONE, new String[] {
+                LinkEntry.PHONE_ID, LinkEntry.COLUMN_PHONE_NAME, LinkEntry.COLUMN_PHONE_PHONENUM, LinkEntry.COLUMN_PHONE_TIME
+        },null, null, null, null, null);
+        if(nmCursor != null){
+            nmCursor.moveToFirst();
+        }
+        return nmCursor;
     }
 
-    private void copyDataBase() {
-
-        try {
-            InputStream myInput = mCtx.getAssets().open(DATABASE_NAME);
-            String outFileName = this.mCtx.getDatabasePath(DATABASE_NAME).getAbsolutePath();
-            ;
-
-            OutputStream myOutput = new FileOutputStream(outFileName);
-
-            byte[] buffer = new byte[1024 * 3];
-
-            int length = 0;
-
-            while ((length = myInput.read(buffer)) > 0) {
-                myOutput.write(buffer, 0, length);
+    /*fetches based on email adress*/
+    public Cursor fetchEmailByName(String name){
+        Cursor nmCursor;
+        if(name == null || name.length() == 0 ){
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
+            },null, null, null, null, null);
+        } else {
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
+            }, LinkEntry.COLUMN_EMAIL_NAME + "like '&'" + name + "'&'", null, null, null, null, null);
+            if (nmCursor != null) {
+                nmCursor.moveToFirst();
             }
-
-            myOutput.flush();
-            myOutput.close();
-            myInput.close();
-        } catch (Exception e) {
-            return;
         }
+        return nmCursor;
+    }
+
+    public Cursor fetchEmailNameByEmail(String email){
+        Cursor nmCursor;
+        if(email == null || email.length() == 0 ){
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
+            },null, null, null, null, null);
+        } else {
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+                    LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
+            }, LinkEntry.COLUMN_EMAIL_EM + "like '&'" + email + "'&'", null, null, null, null, null);
+            if (nmCursor != null) {
+                nmCursor.moveToFirst();
+            }
+        }
+        return nmCursor;
+    }
+
+    /*Fetches all email info*/
+    public Cursor fetchAllEmailInfo(){
+        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[] {
+                LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
+        },null, null, null, null, null);
+        if(nmCursor != null){
+            nmCursor.moveToFirst();
+        }
+        return nmCursor;
+    }
+
+    /*Test function for insertion of links */
+    public void insertSomeFakeEntries(){
+        createLinkEntry("Jonathan", "jwydola@hotmail.com", "http://www.facebook.com","something", "11:53");
+        createLinkEntry("Katherine", "kObert@obert.net", "http://www.reddit.com", "something", "12:24");
+        createLinkEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "some", "24:00");
     }
 
     }

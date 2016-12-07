@@ -31,6 +31,8 @@ public final class LnkContract {
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_LINKS = "linkfetcherocr";
+    public static final String PATH_PHONE = "phonefetcher";
+    public static final String PATH_EMAIL = "emailfetcher";
 
     public static final class LinkEntry implements BaseColumns {
 
@@ -39,24 +41,37 @@ public final class LnkContract {
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
-        public final static String TABLE_NAME = "lnkFtchr";
-        public final static String _ID = BaseColumns._ID;
 
-        public final static String COLUMN_FETCHED_NAME ="name";
+        /*For link Table*/
+        public final static String TABLE_NAME_LINKS = "lnkFtchr";
+        public final static String LINK_ID = BaseColumns._ID;
+        public final static String COLUMN_LINK_NAME ="name";
+        public final static String COLUMN_LINK_FAVICON = "favicon";
+        public final static String COLUMN_LINK_URL = "url";
+        public final static String COLUMN_LINK_TIME = "time";
+        public final static String COLUMN_LINK_TAB_NAME = "tabname";
 
-        public final static String COLUMN_FETCHED_FAVICON = "favicon";
+        /*for phone table*/
+        public final static String TABLE_NAME_PHONE = "phones";
+        public final static String PHONE_ID = BaseColumns._ID;
+        public final static String COLUMN_PHONE_NAME ="name";
+        public final static String COLUMN_PHONE_PHONENUM = "phnNum";
+        public final static String COLUMN_PHONE_TIME = "time";
 
-        public final static String COLUMN_FETCHED_URL = "url";
-        public final static String COLUMN_FETCHED_TIME = "time";
-        public final static String COLUMN_FETCHED_TAB_NAME = "tabname";
-        public static boolean isValidEmail(String email) {
-            return true;
-        }
+        /*for the email table*/
+        public final static String TABLE_NAME_EMAIL = "emails";
+        public final static String EMAIL_ID = BaseColumns._ID;
+        public final static String COLUMN_EMAIL_NAME = "name";
+        public final static String COLUMN_EMAIL_EM = "email";
+        public final static String COLUMN_EMAIL_TIME = "time";
+
+
 
         public static boolean isValidBaseUrl(String url){
             return true;
         }
     }
+
 
 }
 

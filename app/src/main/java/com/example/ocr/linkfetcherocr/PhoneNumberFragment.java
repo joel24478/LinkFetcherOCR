@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 import com.example.ocr.linkfetcherocr.deprecated.LinkAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -93,8 +95,9 @@ public class PhoneNumberFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
-        db.insertSomeFakeEntries();
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_PHONE);
+        db.createPhoneEntry("Jonathan", "9783146229", "12:12");
+        db.createPhoneEntry("Julianne", "SomemoreData", "blahhh");
 
         displayListView();
 
@@ -231,14 +234,13 @@ public class PhoneNumberFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllPhoneInfo();
 
         // The desired columns to be bound
         String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_IMAGE
+                LnkContract.LinkEntry.COLUMN_PHONE_NAME,
+                LnkContract.LinkEntry.COLUMN_PHONE_PHONENUM,
+                LnkContract.LinkEntry.COLUMN_PHONE_TIME
         };
 
         // the XML defined views which the data will be bound to
@@ -278,7 +280,7 @@ public class PhoneNumberFragment extends Fragment
         });
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchPhoneByName(constraint.toString());
             }
         });
     }

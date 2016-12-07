@@ -24,12 +24,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -92,39 +94,12 @@ public class EmailFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
-        db.insertSomeFakeEntries();
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_EMAIL);
+        db.createEmailEntry("SomeName", "SomeEmail", "SomeTime");
+        db.createEmailEntry("NewEmail", "newEmail@student.uml.edu", "SomeTime");
 
         displayListView();
 
-        /*Jwydo * Deprecated to use simplecursor adapter
-        *
-        // Create a new adapter that takes an empty list of links as input
-        //adapter = new LinkAdapter(getActivity(), new ArrayList<Link>());
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        linksListView.setAdapter(adapter);
-
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected link.
-        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current link that was clicked on
-                Link currentLink = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri linkUri = Uri.parse(currentLink.getUrl());
-
-                // Create a new intent to view the Link URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, linkUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
-        */
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -230,14 +205,13 @@ public class EmailFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllEmailInfo();
 
         // The desired columns to be bound
         String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_IMAGE
+                LnkContract.LinkEntry.COLUMN_EMAIL_NAME,
+                LnkContract.LinkEntry.COLUMN_EMAIL_EM,
+                LnkContract.LinkEntry.COLUMN_EMAIL_TIME
         };
 
         // the XML defined views which the data will be bound to
@@ -255,6 +229,20 @@ public class EmailFragment extends Fragment
                 columns,
                 to,
                 0);
+        dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            public boolean setViewValue(View view, Cursor cursor, int i){
+                //hardcode favicon
+                if (i == 3) {
+                    ImageView favIconView = (ImageView) view;
+                    Picasso.with(rootView.getContext()).load("http://i.imgur.com/DvpvklR.png").into(favIconView);
+
+
+
+                }
+                return true;
+            }
+
+        });
 
         linksListView.setAdapter(dataAdapter);
 
@@ -277,7 +265,7 @@ public class EmailFragment extends Fragment
         });
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchEmailByName(constraint.toString());
             }
         });
     }
