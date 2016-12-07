@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +60,8 @@ public class LinkFragment extends Fragment
     }
 
     private static final String REQUEST_URL = "www.google.com";
+
+    private static final String LOG_TAG = LinkFragment.class.getSimpleName();
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
@@ -129,12 +132,19 @@ public class LinkFragment extends Fragment
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
+
             // First, hide loading indicator so error message will be visible
             View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
+
+            //activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
+        } else {
+            // Otherwise, display error
+            // First, hide loading indicator so error message will be visible
+            //View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+            //loadingIndicator.setVisibility(View.GONE);
+
+            Log.v(LOG_TAG, "loadingIndicator is invisible");
 
             // Update empty state with no connection error message
             emptyStateTextView.setText(R.string.no_internet_connection);

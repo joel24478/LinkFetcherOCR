@@ -79,7 +79,7 @@ public class QueryUtils {
             String favIcon = getPageFavIcon(url);
             String name = null;
             String title = getPageTitle(url);
-            String date = getCurrentDate();
+            String date = getTimeStamp();
 
             try{
                 name = getPageName(url);
@@ -155,7 +155,7 @@ public class QueryUtils {
      * Get the current date
      * @return current date.
      */
-    private static String getCurrentDate(){
+    private static String getTimeStamp(){
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
