@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -224,17 +225,19 @@ public class LinkFragment extends Fragment
         // The desired columns to be bound
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL
+                LnkContract.LinkEntry.COLUMN_FETCHED_TAB_NAME,
+                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
+                LnkContract.LinkEntry.COLUMN_FETCHED_FAVICON,
+                LnkContract.LinkEntry.COLUMN_FETCHED_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
                 R.id.link_name,
                 R.id.link_url,
-                R.id.link_address
-        };
+                R.id.link_address,
 
+        };
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
@@ -243,6 +246,21 @@ public class LinkFragment extends Fragment
                 columns,
                 to,
                 0);
+        dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            public boolean setViewValue(View view, Cursor cursor, int i){
+                //hardcode favicon
+                if (i == 3) {
+                    ImageView favIconView = (ImageView) view;
+                    favIconView.setImageBitmap(null);
+                    String favicon = Picasso.with(mCtx).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+
+
+
+                }
+                return true;
+            }
+
+        });
 
         linksListView.setAdapter(dataAdapter);
 

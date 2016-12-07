@@ -109,9 +109,9 @@ public class LnkProvider extends ContentProvider {
         }
 
         // Check that the email Address
-        String ftchEmail = values.getAsString(LinkEntry.COLUMN_FETCHED_ADDRESS);
-        if (ftchEmail == null || !LinkEntry.isValidEmail(ftchEmail)) {
-            throw new IllegalArgumentException("Link requires valid email");
+        String ftchTabName = values.getAsString(LinkEntry.COLUMN_FETCHED_TAB_NAME);
+        if (ftchTabName == null) {
+            throw new IllegalArgumentException("Link requires valid tab name");
         }
 
         // check bse url
@@ -161,10 +161,10 @@ public class LnkProvider extends ContentProvider {
             }
         }
 
-        if (values.containsKey(LinkEntry.COLUMN_FETCHED_ADDRESS)) {
-            String address = values.getAsString(LinkEntry.COLUMN_FETCHED_ADDRESS);
-            if (address == null || LinkEntry.isValidEmail(address)) {
-                throw new IllegalArgumentException("Link requires valid Address");
+        if (values.containsKey(LinkEntry.COLUMN_FETCHED_FAVICON)) {
+            String favIcon = values.getAsString(LinkEntry.COLUMN_FETCHED_FAVICON);
+            if (favIcon == null) {
+                throw new IllegalArgumentException("Link requires valid favIcon");
             }
         }
 

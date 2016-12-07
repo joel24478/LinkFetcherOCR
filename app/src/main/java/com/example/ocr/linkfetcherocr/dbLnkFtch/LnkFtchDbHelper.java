@@ -51,10 +51,10 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME + "("
         + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
         + LnkContract.LinkEntry.COLUMN_FETCHED_NAME + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_IMAGE + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_FETCHED_TAB_NAME + " TEXT, "
+        + LnkContract.LinkEntry.COLUMN_FETCHED_FAVICON + " TEXT, "
         + LnkContract.LinkEntry.COLUMN_FETCHED_URL + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_SEARCHED_TIME + " TEXT);";
+        + LnkContract.LinkEntry.COLUMN_FETCHED_TIME + " TEXT);";
 
 
     public LnkFtchDbHelper(Context context) {
@@ -87,12 +87,12 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long createEntry(String name, String address, String url, String photoUrl){
+    public long createEntry(String name, String tabName, String url, String photoUrl){
         ContentValues initVals = new ContentValues();
         //Ref: @http://stackoverflow.com/questions/6341776/how-to-save-bitmap-in-database
         initVals.put(LinkEntry.COLUMN_FETCHED_NAME, name);
-        initVals.put(LinkEntry.COLUMN_IMAGE, photoUrl);
-        initVals.put(LinkEntry.COLUMN_FETCHED_ADDRESS, address);
+        initVals.put(LinkEntry.COLUMN_FETCHED_TAB_NAME, tabName);
+        initVals.put(LinkEntry.COLUMN_FETCHED_FAVICON, photoUrl);
         initVals.put(LinkEntry.COLUMN_FETCHED_URL, url);
         return mDb.insert(LinkEntry.TABLE_NAME, null, initVals);
     }
@@ -122,12 +122,12 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         Cursor nmCursor = null;
         if (inpUrl == null || inpUrl.length() == 0) {
             nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[]{
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
+                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
             }, null, null, null, null, null);
         }
         else{
             nmCursor = mDb.query(true, LinkEntry.TABLE_NAME, new String[] {
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
+                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
             }, LinkEntry.COLUMN_FETCHED_URL + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
         }
         if (nmCursor != null){
@@ -139,11 +139,11 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         Cursor nmCursor = null;
         if (inpUrl == null || inpUrl.length() == 0) {
             nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[]{
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
+                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
             }, null, null, null, null, null);
         } else {
             nmCursor = mDb.query(true, LinkEntry.TABLE_NAME, new String[] {
-                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
+                    LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
             }, LinkEntry.COLUMN_FETCHED_NAME + "like '%'" + inpUrl + "'%'", null, null, null, null, null);
 
         }
@@ -151,7 +151,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
     }
     public Cursor fetchAllInfo(){
         Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME, new String[] {
-                LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_ADDRESS, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_IMAGE
+                LinkEntry._ID, LinkEntry.COLUMN_FETCHED_NAME, LinkEntry.COLUMN_FETCHED_TAB_NAME, LinkEntry.COLUMN_FETCHED_URL, LinkEntry.COLUMN_FETCHED_FAVICON
         },null, null, null, null, null);
         if(nmCursor != null){
             nmCursor.moveToFirst();
