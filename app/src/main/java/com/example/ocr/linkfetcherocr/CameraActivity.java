@@ -39,8 +39,9 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
     private CompoundButton autoFocus;
     private CompoundButton useFlash;
     private TextView statusMessage;
-    private TextView textValue;
+    private EditText textValue;
     private String text;
+    private String tempText;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "CameraActivity"; /*Might need to change*/
@@ -51,7 +52,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         setContentView(R.layout.camera_activity);
 
         statusMessage = (TextView)findViewById(R.id.status_message);
-        textValue = (TextView)findViewById(R.id.text_value_temp);
+        textValue = (EditText) findViewById(R.id.text_value);
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
@@ -113,7 +114,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
                     statusMessage.setText(R.string.ocr_success);
                     textValue.setText(text);
                     Log.d(TAG, "Text read: " + text);
-                    // Joel the "text" is right here I could just return here
+                    tempText = text;
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");
@@ -130,10 +131,10 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
     }
     //When save button is clicked it will take the amera text and make an entry
     public void buttonOnClick(View v) {
-        if(text != null && text != "Text will display here"){
-            statusMessage.setText(R.string.ocr_saved_to_database);
-            LinkFragment.db.createEntry("Yoo", "jwydola@hotmail.com", text, "something");
-        }
+        statusMessage.setText(R.string.ocr_saved_to_database);
+        textValue = (EditText)findViewById(R.id.text_value);
+        text = textValue.getText().toString();
+        LinkFragment.db.createEntry("Yoo", "jwydola@hotmail.com", text, "something");
     }
 
 }

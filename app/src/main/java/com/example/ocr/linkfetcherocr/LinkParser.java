@@ -24,6 +24,7 @@ public class LinkParser {
         //Empty Constructor
     }
 
+
     public static List<String> getLink(String text){
         //if no link is found then return N/A
         String link = "N/A";

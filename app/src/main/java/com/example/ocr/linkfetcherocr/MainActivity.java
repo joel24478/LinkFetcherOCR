@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,13 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Starts Camera Activity
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            /*
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
-
+            */
             case R.id.action_camera:
                     Intent intent = new Intent(this, CameraActivity.class);
                 startActivity(intent);
@@ -78,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+    public boolean threeDotSettingsButtonClick(View v) {
+        Log.d("Iam here", "hello5");
+
+        return true;
     }
 
 

@@ -28,6 +28,7 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
         url = pUrl;
     }
 
+
     @Override
     protected void onStartLoading() {
         forceLoad();
