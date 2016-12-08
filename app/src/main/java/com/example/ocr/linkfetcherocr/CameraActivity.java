@@ -16,18 +16,16 @@
 
 package com.example.ocr.linkfetcherocr;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 
@@ -42,6 +40,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
     private CompoundButton useFlash;
     private TextView statusMessage;
     private TextView textValue;
+    private String text;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "CameraActivity"; /*Might need to change*/
@@ -52,7 +51,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         setContentView(R.layout.camera_activity);
 
         statusMessage = (TextView)findViewById(R.id.status_message);
-        textValue = (TextView)findViewById(R.id.text_value);
+        textValue = (TextView)findViewById(R.id.text_value_temp);
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
@@ -60,6 +59,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         findViewById(R.id.read_text).setOnClickListener(this);
         // my_child_toolbar is defined in the layout file
 
+        //getting a back button once taken picture
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
@@ -105,7 +105,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String text = null;
+        text = null;
         if(requestCode == RC_OCR_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
@@ -126,6 +126,14 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-        Log.d("hey12222", text);
+
     }
+    //When save button is clicked it will take the amera text and make an entry
+    public void buttonOnClick(View v) {
+        if(text != null && text != "Text will display here"){
+            statusMessage.setText(R.string.ocr_saved_to_database);
+            LinkFragment.db.createEntry("Yoo", "jwydola@hotmail.com", text, "something");
+        }
+    }
+
 }

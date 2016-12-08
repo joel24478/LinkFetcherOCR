@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="75cd9ad520d5a54d6551da03b716355ab2ffccc6">
+        sha1="86ad2ba02a9c8e6961006ddf9c5989c62aedfaa0">
         <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_197645a728af1226258e4b381fa9233b8ed9bde4\classes.dex" />
     </item>
     <item
@@ -102,21 +102,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
-        <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.0.0_df63832b5f6ba45251f5150e7a894e377c1b3199\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
         <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_44c5051fbb01a80c7fd2cbc70bd62b2c68f7bddc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-9.0.0_df63832b5f6ba45251f5150e7a894e377c1b3199\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -192,21 +192,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f559b9ebc1cc2ded2be5e77f1189c87fd178e8bc">
+        <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a7866bc261c5a5fec9e05c4ece8f7fd676631e4b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\wingn_000\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.10.1\645f1ad2f6f4cbad1cde4c483eae71e4051be6ef\jsoup-1.10.1.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="645f1ad2f6f4cbad1cde4c483eae71e4051be6ef">
         <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\jsoup-1.10.1_87d3b62f892ce9cecde0b0e602050af6794a9e78\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="3a458dbbcf54196fbf6fb842d7e9cedc974f5fac">
-        <dex dex="C:\Users\wingn_000\Documents\GitHub\android\LinkFetcherOCR\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a7866bc261c5a5fec9e05c4ece8f7fd676631e4b\classes.dex" />
     </item>
     <item
         is-multidex="true"

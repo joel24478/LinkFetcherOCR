@@ -70,7 +70,7 @@ public class LinkFragment extends Fragment
     Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    static LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
@@ -101,8 +101,8 @@ public class LinkFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
-        db.insertSomeFakeEntries();
+        //db.deleteAllEntries();
+        //db.insertSomeFakeEntries();
 
         displayListView();
 
