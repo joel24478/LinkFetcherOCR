@@ -108,9 +108,10 @@ public class LinkFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these*/
+        /*the Db will load correctly and everything, just need to invoke calls like these
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
         db.insertSomeFakeEntries();
+        */
 
         displayListView();
 
@@ -225,24 +226,23 @@ public class LinkFragment extends Fragment
         // The desired columns to be bound
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_LINK_NAME,
-                LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME,
                 LnkContract.LinkEntry.COLUMN_LINK_URL,
-                LnkContract.LinkEntry.COLUMN_LINK_FAVICON,
+                LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME,
                 LnkContract.LinkEntry.COLUMN_LINK_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
                 R.id.link_name,
-                R.id.link_tab_name, //change to tabName
                 R.id.link_url,
+                R.id.link_tab_name, //change to tabName
                 R.id.link_time
 
         };
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                getContext(), R.layout.link_list_item,
                 cursor,
                 columns,
                 to,
@@ -289,27 +289,14 @@ public class LinkFragment extends Fragment
         });
 
                 /*gets and sets bitmap for each link*/
+        /*
         ImageView newImgView = (ImageView)activity.findViewById(R.id.link_image);
         for(int i=0;i<dataAdapter.getCount();i++){
             dataAdapter.getItem(i);
         }
         //newImgView.setImageBitmap();
+        */
 
-    }
-    /*http://stackoverflow.com/questions/14513695/creating-a-url-string-to-get-a-favicon-in-java*/
-    public static Bitmap getBitmapFromURL(URL src) {
-        try {
-            URL url = src;
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 }

@@ -93,10 +93,11 @@ public class PhoneNumberFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these*/
+        /*the Db will load correctly and everything, just need to invoke calls like these
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_PHONE);
         db.createPhoneEntry("Jonathan", "9783146229", "12:12");
         db.createPhoneEntry("Julianne", "SomemoreData", "blahhh");
+        */
 
         displayListView();
 
@@ -261,7 +262,7 @@ public class PhoneNumberFragment extends Fragment
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
-        /*
+
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -269,16 +270,14 @@ public class PhoneNumberFragment extends Fragment
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                String url =
-                        cursor.getString(cursor.getColumnIndexOrThrow("url"));
-                Intent newI = new Intent(Intent.ACTION_VIEW);
-                newI.setData(Uri.parse(url));
-                startActivity(newI);
-
+                String phone =
+                        cursor.getString(cursor.getColumnIndexOrThrow("phnNum"));
+                Intent newI = new Intent(Intent.ACTION_DIAL);
+                newI.setData(Uri.parse("tel:" + phone));
+                    startActivity(newI);
             }
         });
-        */
+
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return db.fetchPhoneByName(constraint.toString());

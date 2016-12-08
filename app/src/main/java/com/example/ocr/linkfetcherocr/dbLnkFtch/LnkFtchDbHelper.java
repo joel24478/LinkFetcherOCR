@@ -47,7 +47,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     public  final String LOG_TAG = LnkFtchDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "lnkFtchr.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     /*SQL to create the tables*/
     /*Link*/
@@ -284,8 +284,8 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     /*Test function for insertion of links */
     public void insertSomeFakeEntries(){
-        createLinkEntry("Jonathan", "jwydola@hotmail.com", "http://www.facebook.com","something", "11:53");
-        createLinkEntry("Katherine", "kObert@obert.net", "http://www.reddit.com", "something", "12:24");
+        createLinkEntry("Jonathan", "JJ", "http://www.facebook.com" ,"something", "11:53");
+        createLinkEntry("Katherine", "kObert", "http://www.reddit.com", "something", "12:24");
         createLinkEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "some", "24:00");
     }
 

@@ -93,10 +93,11 @@ public class EmailFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these*/
+        /*the Db will load correctly and everything, just need to invoke calls like these
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_EMAIL);
         db.createEmailEntry("SomeName", "SomeEmail", "SomeTime");
         db.createEmailEntry("NewEmail", "newEmail@student.uml.edu", "SomeTime");
+        */
 
         displayListView();
 
@@ -249,7 +250,7 @@ public class EmailFragment extends Fragment
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
-        /*
+
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -257,16 +258,16 @@ public class EmailFragment extends Fragment
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                String url =
-                        cursor.getString(cursor.getColumnIndexOrThrow("url"));
-                Intent newI = new Intent(Intent.ACTION_VIEW);
-                newI.setData(Uri.parse(url));
+
+                String email =
+                        cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                Intent newI = new Intent(Intent.ACTION_SENDTO);
+                newI.setData(Uri.parse("mailto:" + email));
                 startActivity(newI);
 
             }
         });
-        */
+
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return db.fetchEmailByName(constraint.toString());
