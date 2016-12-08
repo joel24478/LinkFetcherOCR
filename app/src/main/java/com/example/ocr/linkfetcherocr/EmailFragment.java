@@ -58,16 +58,16 @@ public class EmailFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    private LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public EmailFragment(){
@@ -216,19 +216,20 @@ public class EmailFragment extends Fragment
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
-                R.id.link_name,
-                R.id.link_url,
-                R.id.link_address
+                R.id.link_ename,
+                R.id.link_email,
+                R.id.link_email_time
         };
 
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                rootView.getContext(), R.layout.link_list_iteme,
                 cursor,
                 columns,
                 to,
                 0);
+        /*
         dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
             public boolean setViewValue(View view, Cursor cursor, int i){
                 //hardcode favicon
@@ -243,10 +244,12 @@ public class EmailFragment extends Fragment
             }
 
         });
+        */
 
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
+        /*
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -263,6 +266,7 @@ public class EmailFragment extends Fragment
 
             }
         });
+        */
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return db.fetchEmailByName(constraint.toString());

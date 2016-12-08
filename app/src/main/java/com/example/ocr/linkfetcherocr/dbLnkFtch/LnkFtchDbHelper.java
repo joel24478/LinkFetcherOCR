@@ -47,31 +47,31 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     public  final String LOG_TAG = LnkFtchDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "lnkFtchr.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 8;
 
     /*SQL to create the tables*/
     /*Link*/
-    public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME_LINKS + "("
-        + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
+    public static final String SQL_CREATE_LINKS_TABLE = "CREATE TABLE " + LnkContract.LinkEntry.TABLE_NAME_LINKS + " ( "
+        + LnkContract.LinkEntry.LINK_ID + " INTEGER PRIMARY KEY autoincrement, "
         + LnkContract.LinkEntry.COLUMN_LINK_NAME + " TEXT, "
         + LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME + " TEXT, "
         + LnkContract.LinkEntry.COLUMN_LINK_FAVICON + " TEXT, "
         + LnkContract.LinkEntry.COLUMN_LINK_URL + " TEXT, "
-        + LnkContract.LinkEntry.COLUMN_LINK_TIME + " TEXT);";
+        + LnkContract.LinkEntry.COLUMN_LINK_TIME + " TEXT); ";
 
     /*Phone*/
-    public static final String SQL_CREATE_PHONE_TABLE ="CREATE TABLE " + LinkEntry.TABLE_NAME_PHONE+ "("
-        + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
+    public static final String SQL_CREATE_PHONE_TABLE ="CREATE TABLE " + LinkEntry.TABLE_NAME_PHONE+ " ( "
+        + LnkContract.LinkEntry.PHONE_ID + " INTEGER PRIMARY KEY autoincrement, "
         + LinkEntry.COLUMN_PHONE_NAME + " TEXT, "
         + LinkEntry.COLUMN_PHONE_PHONENUM + " TEXT, "
-        + LinkEntry.COLUMN_EMAIL_TIME + " TEXT);";
+        + LinkEntry.COLUMN_PHONE_TIME + " TEXT); ";
 
     /*Email*/
-    public static final String SQL_CREATE_EMAIL_TABLE = "CREATE TABLE " + LinkEntry.TABLE_NAME_EMAIL + "("
-            + LnkContract.LinkEntry._ID + " INTEGER PRIMARY KEY autoincrement, "
+    public static final String SQL_CREATE_EMAIL_TABLE = "CREATE TABLE " + LinkEntry.TABLE_NAME_EMAIL + " ( "
+            + LnkContract.LinkEntry.EMAIL_ID + " INTEGER PRIMARY KEY autoincrement, "
             + LinkEntry.COLUMN_EMAIL_NAME + " TEXT, "
             + LinkEntry.COLUMN_EMAIL_EM + " TEXT, "
-            + LinkEntry.COLUMN_PHONE_TIME + " TEXT);";
+            + LinkEntry.COLUMN_EMAIL_TIME + " TEXT);";
 
 
     public LnkFtchDbHelper(Context context) {
@@ -89,12 +89,10 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(newVersion>oldVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_LINKS);
-            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_PHONE);
-            db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME_EMAIL);
-            onCreate(db);
-        }
+        db.execSQL("DROP TABLE IF EXISTS " + LnkContract.LinkEntry.TABLE_NAME_LINKS);
+        db.execSQL("DROP TABLE IF EXISTS " + LnkContract.LinkEntry.TABLE_NAME_PHONE);
+        db.execSQL("DROP TABLE IF EXISTS " + LnkContract.LinkEntry.TABLE_NAME_EMAIL);
+        onCreate(db);
     }
 
     public LnkFtchDbHelper open() throws SQLException{
@@ -115,8 +113,8 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         /*for a link*/
         initVals.put(LinkEntry.COLUMN_LINK_NAME, name);
         initVals.put(LinkEntry.COLUMN_LINK_TAB_NAME, tabName);
-        initVals.put(LinkEntry.COLUMN_LINK_FAVICON, photoUrl);
         initVals.put(LinkEntry.COLUMN_LINK_URL, url);
+        initVals.put(LinkEntry.COLUMN_LINK_FAVICON, photoUrl);
         initVals.put(LinkEntry.COLUMN_LINK_TIME, time);
         return mDb.insert(LinkEntry.TABLE_NAME_LINKS, null, initVals);
     }
@@ -185,7 +183,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
     /*Fetches all link info*/
     public Cursor fetchAllLinkInfo(){
         Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[] {
-                LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON
+                LinkEntry.LINK_ID, LinkEntry.COLUMN_LINK_NAME, LinkEntry.COLUMN_LINK_TAB_NAME, LinkEntry.COLUMN_LINK_URL, LinkEntry.COLUMN_LINK_FAVICON, LinkEntry.COLUMN_LINK_TIME
         },null, null, null, null, null);
         if(nmCursor != null){
             nmCursor.moveToFirst();
@@ -242,11 +240,11 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
     public Cursor fetchEmailByName(String name){
         Cursor nmCursor;
         if(name == null || name.length() == 0 ){
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_EMAIL, new String[]{
                     LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
             },null, null, null, null, null);
         } else {
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_EMAIL, new String[]{
                     LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
             }, LinkEntry.COLUMN_EMAIL_NAME + "like '&'" + name + "'&'", null, null, null, null, null);
             if (nmCursor != null) {
@@ -259,11 +257,11 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
     public Cursor fetchEmailNameByEmail(String email){
         Cursor nmCursor;
         if(email == null || email.length() == 0 ){
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_EMAIL, new String[]{
                     LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
             },null, null, null, null, null);
         } else {
-            nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[]{
+            nmCursor = mDb.query(LinkEntry.TABLE_NAME_EMAIL, new String[]{
                     LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
             }, LinkEntry.COLUMN_EMAIL_EM + "like '&'" + email + "'&'", null, null, null, null, null);
             if (nmCursor != null) {
@@ -275,7 +273,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     /*Fetches all email info*/
     public Cursor fetchAllEmailInfo(){
-        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_LINKS, new String[] {
+        Cursor nmCursor = mDb.query(LinkEntry.TABLE_NAME_EMAIL, new String[] {
                 LinkEntry.EMAIL_ID, LinkEntry.COLUMN_EMAIL_NAME, LinkEntry.COLUMN_EMAIL_EM, LinkEntry.COLUMN_EMAIL_TIME
         },null, null, null, null, null);
         if(nmCursor != null){

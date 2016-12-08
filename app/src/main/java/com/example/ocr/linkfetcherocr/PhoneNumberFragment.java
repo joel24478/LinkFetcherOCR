@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
-import com.example.ocr.linkfetcherocr.deprecated.LinkAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -59,16 +58,16 @@ public class PhoneNumberFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    private LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public PhoneNumberFragment(){
@@ -245,15 +244,15 @@ public class PhoneNumberFragment extends Fragment
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
-                R.id.link_name,
-                R.id.link_url,
-                R.id.link_address
+                R.id.link_pname,
+                R.id.link_phone,
+                R.id.link_phone_time
         };
 
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                rootView.getContext(), R.layout.link_list_itemp,
                 cursor,
                 columns,
                 to,
@@ -262,6 +261,7 @@ public class PhoneNumberFragment extends Fragment
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
+        /*
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -278,6 +278,7 @@ public class PhoneNumberFragment extends Fragment
 
             }
         });
+        */
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
                 return db.fetchPhoneByName(constraint.toString());

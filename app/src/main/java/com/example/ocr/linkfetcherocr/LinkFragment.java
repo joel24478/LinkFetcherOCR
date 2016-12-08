@@ -73,16 +73,16 @@ public class LinkFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    private LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public LinkFragment(){
@@ -234,8 +234,9 @@ public class LinkFragment extends Fragment
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
                 R.id.link_name,
+                R.id.link_tab_name, //change to tabName
                 R.id.link_url,
-                R.id.link_address
+                R.id.link_time
 
         };
         // create the adapter using the cursor pointing to the desired data
@@ -246,22 +247,21 @@ public class LinkFragment extends Fragment
                 columns,
                 to,
                 0);
+        /*
         dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
             public boolean setViewValue(View view, Cursor cursor, int i){
                 //hardcode favicon
                 if (i == 3) {
                     Context tempC = activity.getBaseContext().getApplicationContext();
                     ImageView favIconView = (ImageView) rootView.findViewById(R.id.link_image);
-                    //favIconView.setImageBitmap(null);
                     Picasso.with(tempC).load("http://i.imgur.com/DvpvklR.png").into(favIconView);
-
-
 
                 }
                 return true;
             }
 
         });
+        */
 
         linksListView.setAdapter(dataAdapter);
 

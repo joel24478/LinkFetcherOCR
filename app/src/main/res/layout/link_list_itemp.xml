@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/link_name"
+                android:id="@+id/link_pname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="4dp"
@@ -32,19 +32,13 @@
                 tools:text="DropBox"/>
 
             <TextView
-                android:id="@+id/link_tab_name"
+                android:id="@+id/link_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 tools:text="Flyer Information"/>
             <TextView
-                android:id="@+id/link_url"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="Url Information"/>
-            <TextView
-                android:id="@+id/link_time"
+                android:id="@+id/link_phone_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -53,12 +47,11 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/link_date"
+            android:id="@+id/link_date3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
             android:textSize="10sp"
             tools:text="Apr 12"/>
-
     </LinearLayout>
 </LinearLayout>

@@ -48,7 +48,7 @@ public class LnkProvider extends ContentProvider {
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_LINKS + "/#", LINK_ID);
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_PHONE, PHONE);
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_PHONE + "/#", PHONE_ID);
-        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_EMAIL, EMAIL);
+        sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_EMAIL, EMAIL_ID);
         sUriMatcher.addURI(LnkContract.CONTENT_AUTHORITY, LnkContract.PATH_EMAIL + "/#", EMAIL_ID);
 
     }
