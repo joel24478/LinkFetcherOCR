@@ -4,6 +4,8 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -17,15 +19,18 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
 
     private String url;
 
+    private LnkFtchDbHelper db;
+
     /**
      * Constructs a new {@link LinkLoader}.
      *
      * @param context of the activity
      * @param pUrl to load data from
      */
-    public LinkLoader(Context context, String pUrl) {
+    public LinkLoader(Context context, String pUrl, LnkFtchDbHelper pDb) {
         super(context);
         url = pUrl;
+        db = pDb;
     }
 
     @Override
@@ -54,7 +59,7 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
 //
 //        Log.v(LOG_TAG, "FavIcon: " + test);
 
-        QueryUtils.createLink(url);
+        QueryUtils.createLink(url, db);
 
         // Perform the network request, parse the response, and extract a list of links.
         List<Link> links = null;

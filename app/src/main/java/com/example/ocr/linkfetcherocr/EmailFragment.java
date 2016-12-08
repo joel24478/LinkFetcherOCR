@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +45,7 @@ public class EmailFragment extends Fragment
         SharedPreferences.OnSharedPreferenceChangeListener {
 
 
+    private static final String LOG_TAG = EmailFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.yahoo.com";
 
     /**
@@ -99,34 +101,12 @@ public class EmailFragment extends Fragment
         db.createEmailEntry("NewEmail", "newEmail@student.uml.edu", "SomeTime");
         */
 
+        //Testing whether QueryUtils works
+        QueryUtils.createEmail("joel24478@gmail.com", db);
+
         displayListView();
 
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            //LoaderManager loaderManager = getLoaderManager();
-
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            emptyStateTextView.setText(R.string.no_internet_connection);
-        }
         return rootView;
     }
 
@@ -139,7 +119,7 @@ public class EmailFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL);
+        return new LinkLoader(getContext(), REQUEST_URL, db);
     }
 
     @Override
@@ -208,6 +188,16 @@ public class EmailFragment extends Fragment
     private void displayListView(){
         Cursor cursor = db.fetchAllEmailInfo();
 
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
+
         // The desired columns to be bound
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_EMAIL_NAME,
@@ -273,5 +263,10 @@ public class EmailFragment extends Fragment
                 return db.fetchEmailByName(constraint.toString());
             }
         });
+
+        // Hide loading indicator because the data has been loaded
+
+        loadingIndicator.setVisibility(View.GONE);
+
     }
 }

@@ -60,7 +60,6 @@ public class LinkFragment extends Fragment
         //something
     }
 
-
     private static final String LOG_TAG = LinkFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.google.com";
 
@@ -120,32 +119,6 @@ public class LinkFragment extends Fragment
 
         displayListView();
 
-
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-       /* if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            //LoaderManager loaderManager = getLoaderManager();
-
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            emptyStateTextView.setText(R.string.no_internet_connection);
-        } */
         return rootView;
     }
 
@@ -158,7 +131,7 @@ public class LinkFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL);
+        return new LinkLoader(getContext(), REQUEST_URL, db);
     }
 
     @Override
@@ -227,6 +200,16 @@ public class LinkFragment extends Fragment
     private void displayListView(){
         Cursor cursor = db.fetchAllLinkInfo();
 
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
+
 
         // The desired columns to be bound
         final String[] columns = new String[] {
@@ -263,12 +246,12 @@ public class LinkFragment extends Fragment
 
                 //if the view id is the same as the link_image
                 if (view.getId() == R.id.link_image) {
-                    Log.v(LOG_TAG, "View found, placing favicon onto item");
+                    //Log.v(LOG_TAG, "View found, placing favicon onto item");
                     // Set the ImageView.
                     ImageView favIconImageView = (ImageView) view;
 
                     String favIconURL = cursor.getString(cursor.getColumnIndexOrThrow("favicon"));
-                    Log.v(LOG_TAG, "favIconUrl: " + favIconURL);
+                    //Log.v(LOG_TAG, "favIconUrl: " + favIconURL);
                     //Picasso places it on that view with the url provided by the databse
                     Picasso.with(getContext()).load(favIconURL).into(favIconImageView);
                     return true;
@@ -305,14 +288,9 @@ public class LinkFragment extends Fragment
             }
         });
 
-                /*gets and sets bitmap for each link*/
-        /*
-        ImageView newImgView = (ImageView)activity.findViewById(R.id.link_image);
-        for(int i=0;i<dataAdapter.getCount();i++){
-            dataAdapter.getItem(i);
-        }
-        //newImgView.setImageBitmap();
-        */
+
+        // Hide loading indicator because the data has been loaded
+        loadingIndicator.setVisibility(View.GONE);
 
     }
 

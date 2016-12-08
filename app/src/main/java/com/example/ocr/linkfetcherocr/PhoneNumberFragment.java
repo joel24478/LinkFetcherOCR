@@ -93,11 +93,11 @@ public class PhoneNumberFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these
+        /*the Db will load correctly and everything, just need to invoke calls like these*/
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_PHONE);
         db.createPhoneEntry("Jonathan", "9783146229", "12:12");
         db.createPhoneEntry("Julianne", "SomemoreData", "blahhh");
-        */
+
 
         displayListView();
 
@@ -167,7 +167,7 @@ public class PhoneNumberFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL);
+        return new LinkLoader(getContext(), REQUEST_URL, db);
     }
 
     @Override
@@ -236,6 +236,17 @@ public class PhoneNumberFragment extends Fragment
     private void displayListView(){
         Cursor cursor = db.fetchAllPhoneInfo();
 
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
+
+
         // The desired columns to be bound
         String[] columns = new String[] {
                 LnkContract.LinkEntry.COLUMN_PHONE_NAME,
@@ -283,6 +294,9 @@ public class PhoneNumberFragment extends Fragment
                 return db.fetchPhoneByName(constraint.toString());
             }
         });
+
+        // Hide loading indicator because the data has been loaded
+        loadingIndicator.setVisibility(View.GONE);
     }
 
 }
