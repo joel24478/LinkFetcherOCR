@@ -106,7 +106,6 @@ public class EmailFragment extends Fragment
 
         displayListView();
 
-
         return rootView;
     }
 
