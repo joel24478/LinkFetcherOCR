@@ -284,9 +284,9 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     /*Test function for insertion of links */
     public void insertSomeFakeEntries(){
-        createLinkEntry("Jonathan", "JJ", "http://www.facebook.com" ,"something", "11:53");
-        createLinkEntry("Katherine", "kObert", "http://www.reddit.com", "something", "12:24");
-        createLinkEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "some", "24:00");
+        createLinkEntry("Jonathan", "JJ", "http://www.facebook.com" ,"http://www.facebook.com/favicon.ico", "11:53");
+        createLinkEntry("Katherine", "kObert", "https://www.reddit.com", "https://www.reddit.com/favicon.ico", "12:24");
+        createLinkEntry("csDepartment", "csDepot", "http://www.cs.uml.edu", "https://www.reddit.com/favicon.ico", "24:00");
     }
 
     }

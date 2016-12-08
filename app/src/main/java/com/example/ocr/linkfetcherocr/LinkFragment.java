@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +60,8 @@ public class LinkFragment extends Fragment
         //something
     }
 
+
+    private static final String LOG_TAG = LinkFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.google.com";
 
     /**
@@ -74,6 +77,8 @@ public class LinkFragment extends Fragment
     private TextView emptyStateTextView;
 
     private View rootView;
+
+    private View itemView;
 
     private Activity activity;
 
@@ -97,6 +102,7 @@ public class LinkFragment extends Fragment
         setHasOptionsMenu(true);
 
         rootView = inflater.inflate(R.layout.link_list, container, false);
+        itemView = inflater.inflate(R.layout.link_list_item, container, false);
         activity = getActivity();
 
         // Find a reference to the {@link ListView} in the layout
@@ -108,10 +114,9 @@ public class LinkFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these
+        /*the Db will load correctly and everything, just need to invoke calls like these*/
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
         db.insertSomeFakeEntries();
-        */
 
         displayListView();
 
@@ -123,7 +128,7 @@ public class LinkFragment extends Fragment
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
+       /* if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             //LoaderManager loaderManager = getLoaderManager();
 
@@ -140,7 +145,7 @@ public class LinkFragment extends Fragment
 
             // Update empty state with no connection error message
             emptyStateTextView.setText(R.string.no_internet_connection);
-        }
+        } */
         return rootView;
     }
 
@@ -224,7 +229,8 @@ public class LinkFragment extends Fragment
 
 
         // The desired columns to be bound
-        String[] columns = new String[] {
+        final String[] columns = new String[] {
+                LnkContract.LinkEntry.COLUMN_LINK_FAVICON,
                 LnkContract.LinkEntry.COLUMN_LINK_NAME,
                 LnkContract.LinkEntry.COLUMN_LINK_URL,
                 LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME,
@@ -233,6 +239,7 @@ public class LinkFragment extends Fragment
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
+                R.id.link_image,
                 R.id.link_name,
                 R.id.link_url,
                 R.id.link_tab_name, //change to tabName
@@ -247,21 +254,31 @@ public class LinkFragment extends Fragment
                 columns,
                 to,
                 0);
-        /*
+
+        // Override the handling of R.id.icon to load an image instead of a string.
         dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
             public boolean setViewValue(View view, Cursor cursor, int i){
-                //hardcode favicon
-                if (i == 3) {
-                    Context tempC = activity.getBaseContext().getApplicationContext();
-                    ImageView favIconView = (ImageView) rootView.findViewById(R.id.link_image);
-                    Picasso.with(tempC).load("http://i.imgur.com/DvpvklR.png").into(favIconView);
 
+                //Log.v(LOG_TAG, "      view: " + view.getId() + "\nlink_image: " + R.id.link_image);
+
+                //if the view id is the same as the link_image
+                if (view.getId() == R.id.link_image) {
+                    Log.v(LOG_TAG, "View found, placing favicon onto item");
+                    // Set the ImageView.
+                    ImageView favIconImageView = (ImageView) view;
+
+                    String favIconURL = cursor.getString(cursor.getColumnIndexOrThrow("favicon"));
+                    Log.v(LOG_TAG, "favIconUrl: " + favIconURL);
+                    //Picasso places it on that view with the url provided by the databse
+                    Picasso.with(getContext()).load(favIconURL).into(favIconImageView);
+                    return true;
+                } else {  // Process the rest of the adapter with default settings.
+                    return false;
                 }
-                return true;
             }
 
         });
-        */
+
 
         linksListView.setAdapter(dataAdapter);
 
