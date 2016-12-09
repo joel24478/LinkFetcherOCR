@@ -270,7 +270,18 @@ public class LinkFragment extends Fragment
                     //Picasso places it on that view with the url provided by the databse
                     Picasso.with(getContext()).load(favIconURL).into(favIconImageView);
                     return true;
-                } else {  // Process the rest of the adapter with default settings.
+                }else if(view.getId() == R.id.link_date){
+                    TextView dateView = (TextView) view;
+
+                    dateView.setText(cursor.getString(cursor.getColumnIndexOrThrow("time")));
+                    return true;
+                } else if(view.getId() == R.id.link_tab_name){
+                    TextView titleView = (TextView) view;
+
+                    titleView.setText(cursor.getString(cursor.getColumnIndexOrThrow("tabname")));
+                    return true;
+                }
+                else {  // Process the rest of the adapter with default settings.
                     return false;
                 }
             }

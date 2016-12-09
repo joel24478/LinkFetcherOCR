@@ -91,7 +91,7 @@ public class QueryUtils {
             Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
 
             //Create an entry in the database
-            pDb.createLinkEntry(name, title, url, favIcon, date);
+            pDb.createLinkEntry(title, name, url, favIcon, date);
         }catch (IOException e){
             Log.e(LOG_TAG, e.getMessage());
         }
