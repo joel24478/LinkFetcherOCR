@@ -109,9 +109,6 @@ public class PhoneNumberFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_PHONE);
-        db.createPhoneEntry("Jonathan", "9783146229", "12:12");
-        db.createPhoneEntry("Julianne", "SomemoreData", "blahhh");
 
 
         displayListView();
