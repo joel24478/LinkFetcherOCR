@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -52,5 +53,36 @@
                 tools:text="newly"/>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/link_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:textSize="10sp"
+            tools:text="Apr 12"/>
+        <!-- For list setting three dots-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <ImageButton android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/threeDotSettingsButton"
+                android:src="@drawable/ic_dots_vertical_grey600_48dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:clickable="true"
+
+                android:background="@null"/>
+            <!--android:onClick="threeDotSettingsButtonClick"-->
+
+
+        </LinearLayout>
+
+>>>>>>> cf185cc21b13ea9102e53cee5c6a1c161b2de629
     </LinearLayout>
+
 </LinearLayout>

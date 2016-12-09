@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         //LinkLoader loader = new LinkLoader(getApplicationContext(), "www.google.com");
 
         // Find the view pager that will allow the user to swipe between fragments
@@ -59,13 +63,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Starts Camera Activity
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            /*
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
-
+            */
             case R.id.action_camera:
                     Intent intent = new Intent(this, CameraActivity.class);
                 startActivity(intent);
@@ -78,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+    public boolean threeDotSettingsButtonClick(View v) {
+        Log.d("Iam here", "hello5");
+
+        return true;
     }
 
 

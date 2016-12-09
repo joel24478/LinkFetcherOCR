@@ -226,7 +226,7 @@ public class QueryUtils {
         String favicon = "N/A";
 
         //Connected to the url and get the html file so we can travers the file
-        Document doc = Jsoup.connect(formattedUrl).get();
+        Document doc = Jsoup.connect("https://www.google.com").get();
         //Travers the file to find the first occurrence of a .ico file
         Element element = doc.head().select("link[href~=.*\\.ico]").first();
 

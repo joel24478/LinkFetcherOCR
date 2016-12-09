@@ -33,6 +33,7 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
         db = pDb;
     }
 
+
     @Override
     protected void onStartLoading() {
         forceLoad();
@@ -44,20 +45,26 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
     @Override
     public List<Link> loadInBackground() {
         if (url == null) {
+            Log.e(LOG_TAG, "url is null");
             return null;
         }
 
-//        String test = "Failed";
-//
-//        try {
-//
-//            test = QueryUtils.getPageFavIcon(url);
-//
-//        }catch(IOException e){
-//            Log.e(LOG_TAG, e.getMessage());
-//        }
-//
-//        Log.v(LOG_TAG, "FavIcon: " + test);
+        Log.v(LOG_TAG, "starting parser");
+         if(!LinkParser.getLink(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a link ");
+             QueryUtils.createLink(url ,LinkFragment.db);
+        }else if(!LinkParser.getEmail(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a email ");
+            QueryUtils.createEmail(url ,LinkFragment.db);
+
+        }else if(!LinkParser.getPhoneNumber(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a phone number ");
+            QueryUtils.createPhoneNumber(url, LinkFragment.db);
+
+        }else{
+            Log.e(LOG_TAG, "This is neither a link, email nor phone number: " + url);
+
+        }
 
         QueryUtils.createLink(url, db);
 

@@ -102,7 +102,7 @@ public class EmailFragment extends Fragment
         */
 
         //Testing whether QueryUtils works
-        QueryUtils.createEmail("joel24478@gmail.com", db);
+        //QueryUtils.createEmail("joel24478@gmail.com", db);
 
         displayListView();
 
@@ -177,11 +177,13 @@ public class EmailFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        /*
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){

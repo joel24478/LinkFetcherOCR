@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -62,6 +63,7 @@ public class LinkFragment extends Fragment
 
     private static final String LOG_TAG = LinkFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.google.com";
+    private static String url = "N/A";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
@@ -79,10 +81,12 @@ public class LinkFragment extends Fragment
 
     private View itemView;
 
-    private Activity activity;
+    private static Activity activity;
 
     /*Jwydo*/
-    private LnkFtchDbHelper db;
+
+    public static LnkFtchDbHelper db;
+
 
     private SimpleCursorAdapter dataAdapter;
 
@@ -114,15 +118,29 @@ public class LinkFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
+
         db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
         db.insertSomeFakeEntries();
+        //QueryUtils.createLink(REQUEST_URL, db);
+
 
         displayListView();
 
         return rootView;
     }
 
+    public static void callLoader(String pUrl){
+        url = pUrl;
+        LinkFragment linkFragment = new LinkFragment();
 
+        linkFragment.callLoaderHelper();
+
+    }
+
+    public void callLoaderHelper(){
+        Log.v(LOG_TAG, "callback: " + this);
+        activity.getLoaderManager().restartLoader(LINK_LOADER_ID, null, this).forceLoad();
+    }
     @Override
     public Loader<List<Link>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -131,7 +149,7 @@ public class LinkFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL, db);
+        return new LinkLoader(getContext(), url, db);
     }
 
     @Override
@@ -190,11 +208,13 @@ public class LinkFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        /*
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
@@ -259,8 +279,9 @@ public class LinkFragment extends Fragment
                     return false;
                 }
             }
-
         });
+
+
 
 
         linksListView.setAdapter(dataAdapter);
