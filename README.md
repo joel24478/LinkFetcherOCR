@@ -4,7 +4,7 @@
 ##Mobile App Programming 1
 ##Group: Jonathan Wydola, Joel Cruz, Martin Rudzki
 
-
+Video of project: https://www.youtube.com/watch?v=98_KWLSdYAI&feature=youtu.be
 ##LinkFetcherOcr
 Link fetcher ocr is a student developed android app highlighting the skills and progress of our java, xml, and general android developer knowledge. 
 
@@ -109,4 +109,4 @@ email(EMAIL_ID, name, email, time)
     
 ![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/UML_zpsfyqvwgnn.jpg)
 
-https://www.youtube.com/watch?v=98_KWLSdYAI&feature=youtu.be
+
