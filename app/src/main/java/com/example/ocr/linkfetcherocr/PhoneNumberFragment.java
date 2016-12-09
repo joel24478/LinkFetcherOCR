@@ -59,7 +59,7 @@ public class PhoneNumberFragment extends Fragment
         dataAdapter.changeCursor(newCursor);
         super.onResume();
     }
-    private static final String REQUEST_URL = "www.yahoo.com";
+    private static String phoneNumber = "N/A";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
@@ -108,8 +108,6 @@ public class PhoneNumberFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these*/
-
 
         displayListView();
 
@@ -179,7 +177,7 @@ public class PhoneNumberFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL, db);
+        return new PhoneNumberLoader(getContext(), phoneNumber, db);
     }
 
     @Override

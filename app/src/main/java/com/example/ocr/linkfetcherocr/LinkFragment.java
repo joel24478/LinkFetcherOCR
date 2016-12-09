@@ -70,7 +70,6 @@ public class LinkFragment extends Fragment
     }
 
     private static final String LOG_TAG = LinkFragment.class.getSimpleName();
-    private static final String REQUEST_URL = "www.google.com";
     private static String url = "N/A";
 
     /**
@@ -137,18 +136,6 @@ public class LinkFragment extends Fragment
         return rootView;
     }
 
-    public static void callLoader(String pUrl){
-        url = pUrl;
-        LinkFragment linkFragment = new LinkFragment();
-
-        linkFragment.callLoaderHelper();
-
-    }
-
-    public void callLoaderHelper(){
-        Log.v(LOG_TAG, "callback: " + this);
-        activity.getLoaderManager().restartLoader(LINK_LOADER_ID, null, this).forceLoad();
-    }
     @Override
     public Loader<List<Link>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());

@@ -53,20 +53,10 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
          if(!LinkParser.getLink(url).equals("N/A")){
             Log.v(LOG_TAG, url + " is a link ");
              QueryUtils.createLink(url ,LinkFragment.db);
-        }else if(!LinkParser.getEmail(url).equals("N/A")){
-            Log.v(LOG_TAG, url + " is a email ");
-            QueryUtils.createEmail(url ,LinkFragment.db);
-
-        }else if(!LinkParser.getPhoneNumber(url).equals("N/A")){
-            Log.v(LOG_TAG, url + " is a phone number ");
-            QueryUtils.createPhoneNumber(url, LinkFragment.db);
-
         }else{
             Log.e(LOG_TAG, "This is neither a link, email nor phone number: " + url);
 
         }
-
-        QueryUtils.createLink(url, db);
 
         // Perform the network request, parse the response, and extract a list of links.
         List<Link> links = null;
