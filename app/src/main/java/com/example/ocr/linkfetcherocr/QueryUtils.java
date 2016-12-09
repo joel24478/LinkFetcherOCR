@@ -91,6 +91,7 @@ public class QueryUtils {
             Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
 
             //Create an entry in the database
+
             pDb.createLinkEntry(title, name, url, favIcon, date);
         }catch (IOException e){
             Log.e(LOG_TAG, e.getMessage());
@@ -136,7 +137,7 @@ public class QueryUtils {
         if(matcher.find()){
             formattedURL = url;
         }else{
-            formattedURL = "http://" + url;
+            formattedURL = "https://" + url;
         }
 
         return formattedURL;
@@ -172,7 +173,7 @@ public class QueryUtils {
     private static String getTimeStamp(){
 
         Calendar c = Calendar.getInstance();
-        System.out.println("Current time => " + c.getTime());
+        //System.out.println("Current time => " + c.getTime());
 
         SimpleDateFormat df = new SimpleDateFormat("MMM dd/yyyy");
         String formattedDate = df.format(c.getTime());
