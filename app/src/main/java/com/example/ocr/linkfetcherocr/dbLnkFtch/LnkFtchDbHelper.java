@@ -48,7 +48,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
 
     public  final String LOG_TAG = LnkFtchDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "lnkFtchr.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
 
     /*SQL to create the tables*/
     /*Link*/
