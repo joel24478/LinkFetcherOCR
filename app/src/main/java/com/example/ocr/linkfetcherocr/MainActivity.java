@@ -69,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
             */
-            case R.id.action_camera:
-                    Intent intent = new Intent(this, CameraActivity.class);
-                startActivity(intent);
-
-                return true;
 
             default:
                 // If we got here, the user's action was not recognized.
