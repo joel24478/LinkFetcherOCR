@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.example.ocr.linkfetcherocr.Link;
 import com.example.ocr.linkfetcherocr.R;
@@ -111,6 +112,7 @@ public class LnkFtchDbHelper extends SQLiteOpenHelper {
         ContentValues initVals = new ContentValues();
         //Ref: @http://stackoverflow.com/questions/6341776/how-to-save-bitmap-in-database
         /*for a link*/
+        Log.v(LOG_TAG, "making a link entry");
         initVals.put(LinkEntry.COLUMN_LINK_NAME, name);
         initVals.put(LinkEntry.COLUMN_LINK_TAB_NAME, tabName);
         initVals.put(LinkEntry.COLUMN_LINK_URL, url);

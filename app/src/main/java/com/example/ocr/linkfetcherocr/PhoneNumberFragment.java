@@ -55,7 +55,7 @@ public class PhoneNumberFragment extends Fragment
     @Override
     public void onResume(){
         db.open();
-        Cursor newCursor = db.fetchAllEmailInfo();
+        Cursor newCursor = db.fetchAllPhoneInfo();
         dataAdapter.changeCursor(newCursor);
         super.onResume();
     }

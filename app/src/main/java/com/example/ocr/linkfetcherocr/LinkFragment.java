@@ -127,8 +127,8 @@ public class LinkFragment extends Fragment
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
 
-        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
-        db.insertSomeFakeEntries();
+        //db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
+        //db.insertSomeFakeEntries();
         //QueryUtils.createLink(REQUEST_URL, db);
 
 
