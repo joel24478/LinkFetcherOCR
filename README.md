@@ -24,47 +24,83 @@ This is the general file structure of the program and listed below each member i
 *The indentation represents the text under it being sub files of the folder*
 
 ###Martin:
+
 camera
-    CameraSource.java
-    CameraSourcePreview.java
-    GraphicOverlay.java
+
+   CameraSource.java
+    
+   CameraSourcePreview.java
+    
+   GraphicOverlay.java
 CameraActivity.java
+
 CameraView.java
+
 OcrCaptureActivity.java
+
 OcrDetectorProcessor.java
+
 OcrGraphic.java
+
 Camera_activity.xml
+
 Ocr_capture.xml
+
 main.xml
 
+
 ###Joel: 
+
 CategoryAdapter.java
+
 Link.java
+
 QuesyUtils.java
+
 Linkloader.java
+
 SettingsActivity.java
+
 MainActivity
+
 res/General design of program
 
+
+
 ###Jonathan:
- dbLnkFtch
+
+dbLnkFtch
+
 LnkFtchrDbHelper.java
+
 LnkProvider.java
+
 LnkContract.java
+
 LinkFragment.java
+
 EmailFragment.java
+
 PhoneNumberFragment.java
+
 List_item.xml
+
 Link_list_item.xml
+
 Link_list_iteme.xml
+
 Link_list_itemp.xml
+
 
 
 /* the following tables hold the data for each type of entry, no connections are made*/
 Tables included:
-    links(LINK_ID, name, tab_name, url, favicon, time)
-    phone(PHONE_ID, name, phoneNumber, time)
-    email(EMAIL_ID, name, email, time)
+
+links(LINK_ID, name, tab_name, url, favicon, time)
+
+phone(PHONE_ID, name, phoneNumber, time)
+
+email(EMAIL_ID, name, email, time)
     
     ##Project Design:
 
