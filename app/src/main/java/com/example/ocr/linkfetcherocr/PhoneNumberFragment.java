@@ -41,9 +41,24 @@ import java.util.List;
 
 public class PhoneNumberFragment extends Fragment
         implements android.app.LoaderManager.LoaderCallbacks<List<Link>>,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        LinkFragmentLifecycle{
+    @Override
+    public void onPauseFragment(){
+        //something
+    }
+    @Override
+    public void onResumeFragment(){
+        //something
+    }
 
-
+    @Override
+    public void onResume(){
+        db.open();
+        Cursor newCursor = db.fetchAllEmailInfo();
+        dataAdapter.changeCursor(newCursor);
+        super.onResume();
+    }
     private static final String REQUEST_URL = "www.yahoo.com";
 
     /**
