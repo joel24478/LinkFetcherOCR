@@ -63,10 +63,7 @@ public class QueryUtils {
     /**
      * Create a URL entry in the database.
      * @param pUrl the url for the site
-<<<<<<< HEAD
-=======
      * @param pDb the database to place entry in
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
      *
      */
     public static void createLink(String pUrl, LnkFtchDbHelper pDb){
@@ -94,23 +91,6 @@ public class QueryUtils {
             Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
 
             //Create an entry in the database
-<<<<<<< HEAD
-            pDb.createEntry(title, name, url, favIcon);
-        }catch (IOException e){
-            Log.e(LOG_TAG, e.getMessage());
-        }
-    }
-
-    /**
-     * Create a Email entry in the database
-     * @param pEmail the email to add to the
-     * @param pDb the database to place the entry in
-     * @return void.
-     */
-    private static void createEmail(String pEmail, LnkFtchDbHelper pDb) {
-
-        //pDb.createEntry()
-=======
             pDb.createLinkEntry(name, title, favIcon, url, date);
         }catch (IOException e){
             Log.e(LOG_TAG, e.getMessage());
@@ -139,7 +119,6 @@ public class QueryUtils {
 
         String date = getTimeStamp();
         pDb.createPhoneEntry("N/A", pNumber, date);
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
     /**

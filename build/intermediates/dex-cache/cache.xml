@@ -61,11 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-<<<<<<< HEAD
-        sha1="be1152097cb3fad538ec7f94c01df048cc1fc1f4">
-=======
         sha1="3d5afdf5b4c03e360bb8824837de27592f4da671">
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
         <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_66af00b17ba1bc5dd577220ffdf5871bfb6b00ad/classes.dex" />
     </item>
     <item
@@ -209,11 +205,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-<<<<<<< HEAD
-        sha1="5d1caa452ebbdac72c7b9860ed49ef9f7cfbbba4">
-=======
         sha1="7ad81aa44b636f69dc5ee3c1cc6fee48b8549d01">
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
         <dex dex="/Users/Joel/Projects/Android/LinkFetcherOCR/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_42a7558a622a70662996d90af793c3d17eb4f52a/classes.dex" />
     </item>
     <item

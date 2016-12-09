@@ -65,8 +65,6 @@ public class LinkFragment extends Fragment
     private static final String REQUEST_URL = "www.google.com";
     private static String url = "N/A";
 
-    private static final String LOG_TAG = LinkFragment.class.getSimpleName();
-
     /**
      * Constant value for the link loader ID. We can choose any integer.
      */
@@ -135,33 +133,8 @@ public class LinkFragment extends Fragment
         url = pUrl;
         LinkFragment linkFragment = new LinkFragment();
 
-<<<<<<< HEAD
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            //activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            //View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
-            //loadingIndicator.setVisibility(View.GONE);
-
-            Log.v(LOG_TAG, "loadingIndicator is invisible");
-
-            // Update empty state with no connection error message
-            emptyStateTextView.setText(R.string.no_internet_connection);
-        }
-        return rootView;
-=======
         linkFragment.callLoaderHelper();
 
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
     public void callLoaderHelper(){
@@ -176,11 +149,7 @@ public class LinkFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-<<<<<<< HEAD
-        return new LinkLoader(getContext(), REQUEST_URL,db);
-=======
         return new LinkLoader(getContext(), url, db);
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
     @Override

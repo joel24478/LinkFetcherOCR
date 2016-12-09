@@ -18,27 +18,18 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
     private static final String LOG_TAG = LinkLoader.class.getSimpleName();
 
     private String url;
-    private Context context;
-    LnkFtchDbHelper db;
 
     private LnkFtchDbHelper db;
 
     /**
      * Constructs a new {@link LinkLoader}.
      *
-     * @param pContext of the activity
+     * @param context of the activity
      * @param pUrl to load data from
      */
-<<<<<<< HEAD
-    public LinkLoader(Context pContext, String pUrl, LnkFtchDbHelper pDb) {
-        super(pContext);
-        url = pUrl;
-        //context = pContext;
-=======
     public LinkLoader(Context context, String pUrl, LnkFtchDbHelper pDb) {
         super(context);
         url = pUrl;
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
         db = pDb;
     }
 
@@ -58,19 +49,6 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
             return null;
         }
 
-<<<<<<< HEAD
-//        String test = "Failed";
-//
-//        try {
-//
-//            test = QueryUtils.getPageFavIcon(url);
-//
-//        }catch(IOException e){
-//            Log.e(LOG_TAG, e.getMessage());
-//        }
-//
-//        Log.v(LOG_TAG, "FavIcon: " + test);
-=======
         Log.v(LOG_TAG, "starting parser");
          if(!LinkParser.getLink(url).equals("N/A")){
             Log.v(LOG_TAG, url + " is a link ");
@@ -87,7 +65,6 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
             Log.e(LOG_TAG, "This is neither a link, email nor phone number: " + url);
 
         }
->>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
 
         QueryUtils.createLink(url, db);
 
