@@ -62,7 +62,7 @@ public class EmailFragment extends Fragment
     }
 
     private static final String LOG_TAG = EmailFragment.class.getSimpleName();
-    private static final String REQUEST_URL = "www.yahoo.com";
+    private static String email = "N/A";
 
     /**
      * Constant value for the link loader ID. We can choose any integer.
@@ -134,7 +134,7 @@ public class EmailFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
-        return new LinkLoader(getContext(), REQUEST_URL, db);
+        return new EmailLoader(getContext(), email, db);
     }
 
     @Override

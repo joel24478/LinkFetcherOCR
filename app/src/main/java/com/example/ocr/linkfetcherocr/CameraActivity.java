@@ -143,9 +143,23 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         textValue = (EditText)findViewById(R.id.text_value);
         text = textValue.getText().toString();
 
-        Log.v(TAG, "Starting loader to parse text");
-        LinkLoader loader = new LinkLoader(getApplicationContext(), text, LinkFragment.db);
-        loader.loadInBackground();
+        Log.v(TAG, "starting parser");
+        if(!LinkParser.getLink(text).equals("N/A")){
+            Log.v(TAG, text + " is a link ");
+            LinkLoader loader = new LinkLoader(getApplicationContext(), text, LinkFragment.db);
+            loader.loadInBackground();
+        }else if(!LinkParser.getEmail(text).equals("N/A")){
+            Log.v(TAG, text + " is a email ");
+            EmailLoader loader = new EmailLoader(getApplicationContext(), text, LinkFragment.db);
+            loader.loadInBackground();
+        }else if(!LinkParser.getPhoneNumber(text).equals("N/A")){
+            Log.v(TAG, text + " is a phone number ");
+            PhoneNumberLoader loader = new PhoneNumberLoader(getApplicationContext(), text, LinkFragment.db);
+            loader.loadInBackground();
+        }else{
+            Log.e(TAG, "This is neither a link, email nor phone number: " + text);
+
+        }
 
 
     }

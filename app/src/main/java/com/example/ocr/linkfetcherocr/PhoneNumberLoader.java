@@ -6,18 +6,17 @@ import android.util.Log;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Joel on 11/3/16.
+ * Created by Joel on 12/8/16.
  */
 
-public class LinkLoader extends AsyncTaskLoader<List<Link>> {
+public class PhoneNumberLoader extends AsyncTaskLoader<List<Link>> {
 
     private static final String LOG_TAG = LinkLoader.class.getSimpleName();
 
-    private String url;
+    private String phoneNumber;
 
     private LnkFtchDbHelper db;
 
@@ -25,11 +24,11 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
      * Constructs a new {@link LinkLoader}.
      *
      * @param context of the activity
-     * @param pUrl to load data from
+     * @param pPhoneNumber to load data from
      */
-    public LinkLoader(Context context, String pUrl, LnkFtchDbHelper pDb) {
+    public PhoneNumberLoader(Context context, String pPhoneNumber, LnkFtchDbHelper pDb) {
         super(context);
-        url = pUrl;
+        phoneNumber = pPhoneNumber;
         db = pDb;
     }
 
@@ -44,17 +43,18 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
      */
     @Override
     public List<Link> loadInBackground() {
-        if (url == null) {
-            Log.e(LOG_TAG, "url is null");
+        if (phoneNumber == null) {
+            Log.e(LOG_TAG, "phoneNumber is null");
             return null;
         }
 
-        Log.v(LOG_TAG, "starting parser");
-         if(!LinkParser.getLink(url).equals("N/A")){
-            Log.v(LOG_TAG, url + " is a link ");
-             QueryUtils.createLink(url ,LinkFragment.db);
+        //Log.v(LOG_TAG, "starting parser");
+
+        if(!LinkParser.getPhoneNumber(phoneNumber).equals("N/A")){
+            Log.v(LOG_TAG, phoneNumber + " is a phoneNumber ");
+            QueryUtils.createPhoneNumber(phoneNumber ,LinkFragment.db);
         }else{
-            Log.e(LOG_TAG, "This is neither a link, email nor phone number: " + url);
+            Log.e(LOG_TAG, "This is not a phoneNumber => " + phoneNumber);
 
         }
 
