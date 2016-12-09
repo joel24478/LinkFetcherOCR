@@ -2,6 +2,8 @@ package com.example.ocr.linkfetcherocr;
 
 import android.graphics.Bitmap;
 
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+
 import java.net.URL;
 
 /**
@@ -13,8 +15,8 @@ public class Link {
     //Link
     private String url;
 
-    //A bitmap image of the favicon from the link
-    Bitmap favicon;
+    //A url of where the image of the favicon is located
+    String favicon;
 
     // The <title> that is found in the <head> of the html page
     private String tabName;
@@ -25,6 +27,8 @@ public class Link {
     //The date when the link was fetched
     private String date;
 
+    //The database
+    private LnkFtchDbHelper db;
 
     /**
      * Constructs a new {@link Link} object without a description.
@@ -35,7 +39,7 @@ public class Link {
      * @param pTabName is the title the web page has
      * @param pDate is the date when the link was fetched
      */
-    public Link(String pUrl, Bitmap pFavicon, String pName, String pTabName, String pDate){
+    public Link(String pUrl, String pFavicon, String pName, String pTabName, String pDate){
         url = pUrl;
         favicon = pFavicon;
         name = pName;
@@ -45,7 +49,7 @@ public class Link {
 
 
     public String getUrl(){return url;}
-    public Bitmap getFavicon(){return favicon;}
+    public String getFavicon(){return favicon;}
     public String getName(){return name;}
     public String getTabName(){return tabName;}
     public String getDate(){return date;}

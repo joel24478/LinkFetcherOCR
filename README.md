@@ -1,82 +1,74 @@
-# LinkFetcherOCR
-Fetches links of of your phones camera
 
 
-Jonathan Wydola
+#Final Project Paper
+##Mobile App Programming 1
+##Group: Jonathan Wydola, Joel Cruz, Martin Rudzki
 
 
-
-This app will open to the main activity, user will be prompted with 2 selections, to scan image using camera or to scan image using a picture from the gallery. The picture will then be rendered by the goolge vision api to pull a url from the picture. This url will then be stored in a database that will keep previously searched items. A match on previously searched items will act as a cache to quickly open url’s that are contained already in the database. The title will be pulled from the html page and will display the title in place of the url.
-
-![alt tag](http://i795.photobucket.com/albums/yy234/joel24478/Screen%20Shot%202016-11-01%20at%208.48.10%20PM_zpsy88hv2zc.png)
-
-##Tasks:##
-####Martin####
-* GUI
-* Camera implementation
-
-####Joel####
-* API call
-* HTTP Request
-
-####Jonathan####
-* JSON
-* SQL Queries
-
-whoever wants to take these
-* Parse title result (html)
-* Fetch url images
-
-##Progress Report #1:##
-####Joel####
-Google API - We are using the google api to fetch the text from images. We moved away from using tesseract, because we were having horrible results where it was getting the text from images completely wrong. Its implemented into our code.
-####Martin####
-We have the camera detecting text and now are in the process of getting everything together.
-The GUI is still a work in progress, this is what we have so far.
-
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/510197de-2de6-4b86-b339-daca73fbdd5e_zpsiqwg7z26.jpg)
-####Jonathan####
-The Database is completed and we are in the process of getting everything together.
-
-##Progress Report #2:##
-####Joel####
-Google API - Up and running, is working with the images
-
-####Martin####
-GUI is comming along but still needs a little polishing. Camera is not where we want it.
-
-####Jonathan####
-The Database is up and running and we have it working great with the rest of the app.
-
-##Progress Report #3:##
-####Joel####
-The static class LinkParser has a set of static functions that are able to find email’s, URL’s and phone number’s. It uses the Pattern and Matcher classes that take in regular expression to find matching text.
-
-The static class QueryUtils has a set of static functions that can create Link objects using the Link class, grab images from a url, and travers html files from a url to grab information such as title, and favicon. I used the jsoup library to traverse the html page, and the picasso library to grab images from a url. Both libraries are quick and saved us much time in. I could have wrote a function to grab images from a url, but picasso has many other useful functionality like its own garbage collector.
-
-The asynchronous class LinkLoader uses both the classes mentioned above to do all the dirty work in the background as to not slow down our app. It's not completely finished because I have to fetch the data from the database and populate the view.
-
-####Martin####
-Worked on bringing on adding extra GUI elements together as well as finally adding the camera activity to the overall app. They were initially set as two different projects. Also was able to pull text from the camera app call that takes the text on the screen and put it as a string. That string gets passed onto (Joel’s part) where he parses the string and then gets sent to the database(Jonathan’s part). Currently working on adding an edit feature to be able to edit the saved link, phone numbers or email address.
-
-####Jonathan####
-db is now created with a single take named lnkftchr. The database also functions with the URI and is of similar structure to the pets program but handles the displaying of data differently. Has the columns name, eadress, url, time and is functional with insertion and deletion. The table supports truncation and creation upon version updates. The database information is displayed using a simple cursor adapter in the linkfragments.java file. When a entry is clicked on the url associated with the entry spawns a new intent that brings up the web browser, saving the link you scanned into your browser's history. The program now is able to call the home button without crashing. It can also completely rotate from portrait to landscape to portrait.
-
-####Picture show of the app####
-1) App gui
-
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2502_zps2qofsgag.jpg)
-
-2) Clicking on camera
-
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2503_zpsy4vlmego.jpg)
-
-3) paper of text that it is grabbing from
-
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2505_zps65ygirww.jpg)
-
-4) how the app looks once text is read
-
-![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/IMG_2504_zpsrozdzqlk.jpg)
+##LinkFetcherOcr
+Link fetcher ocr is a student developed android app highlighting the skills and progress of our java, xml, and general android developer knowledge. 
 
 
+###Goal: 
+the goal of the program is to scan links, emails, and phone numbers from the googleOCR api. Once this data is acquired, it is checked to guarantee that the data scanned from the camera is correct and properly placed into its own table in our database. This data will then be displayed from its table to a ListView within the proper fragment. The user will then be able to click entries from each fragment and have it spawn the following activities. A web page for a url, a email for a email address, and a phone dial view for a phone number
+
+###Features: 
+The programs biggest  features are the camera, the link parser, and the database implementations. 
+The camera and submission of the text is a key feature. The user creates a new activity when the camera icon is selected. From that activity the user can set the textbox of the image scanned with a static value. The detect text button spawns the camera with the googleOCR api and allows text to be pulled from the scanned image. This is then saved to the text field in the previous activity. When the save button is pressed, the text is passed to query utils and the features to parse the text.
+The link parser and utilities are created to validate the data provided before it is searched for or entered in the database. These utilities also handle features to parse the supplied url. Getting the favicon is an example to how a utility used to get a favicon and store that favicon url based on the url from the camera activity. An asynchronous task does this parsing and grabbing of the favicon. Once the data passes inspection it is entered into the database.
+Directly from the main activity the program uses view pager to display our three fragments.  Each of these fragments represent a ListView for each individual table. To display this data we use a simpleCursorAdapter with the columns desired and the proper id in each list. When the database is clicked on, depending on which data set is clicked, a new intent is spawned. This intent will either launch a new webpage, phone dial, or email view. 
+
+###File structure: 
+This is the general file structure of the program and listed below each member is the files he worked on. Keep in mind that at some points during development we each helped other with problems that caused roadblocks in development.
+
+*The indentation represents the text under it being sub files of the folder*
+
+###Martin:
+camera
+    CameraSource.java
+    CameraSourcePreview.java
+    GraphicOverlay.java
+CameraActivity.java
+CameraView.java
+OcrCaptureActivity.java
+OcrDetectorProcessor.java
+OcrGraphic.java
+Camera_activity.xml
+Ocr_capture.xml
+main.xml
+
+###Joel: 
+CategoryAdapter.java
+Link.java
+QuesyUtils.java
+Linkloader.java
+SettingsActivity.java
+MainActivity
+res/General design of program
+
+###Jonathan:
+ dbLnkFtch
+LnkFtchrDbHelper.java
+LnkProvider.java
+LnkContract.java
+LinkFragment.java
+EmailFragment.java
+PhoneNumberFragment.java
+List_item.xml
+Link_list_item.xml
+Link_list_iteme.xml
+Link_list_itemp.xml
+
+
+/* the following tables hold the data for each type of entry, no connections are made*/
+Tables included:
+    links(LINK_ID, name, tab_name, url, favicon, time)
+    phone(PHONE_ID, name, phoneNumber, time)
+    email(EMAIL_ID, name, email, time)
+    
+    ##Project Design:
+
+
+(Below contains a UML of our entire app)
+    
+![alt tag](http://i50.photobucket.com/albums/f333/MartinRudzki/UML_zpsfyqvwgnn.jpg)
