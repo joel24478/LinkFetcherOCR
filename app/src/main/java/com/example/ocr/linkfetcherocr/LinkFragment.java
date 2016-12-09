@@ -61,14 +61,6 @@ public class LinkFragment extends Fragment
         //something
     }
 
-    @Override
-    public void onResume(){
-        db.open();
-        Cursor newCursor = db.fetchAllLinkInfo();
-        dataAdapter.changeCursor(newCursor);
-        super.onResume();
-    }
-
     private static final String LOG_TAG = LinkFragment.class.getSimpleName();
     private static String url = "N/A";
 
