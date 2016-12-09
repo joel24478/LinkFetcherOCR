@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,7 +61,9 @@ public class LinkFragment extends Fragment
         //something
     }
 
+    private static final String LOG_TAG = LinkFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.google.com";
+    private static String url = "N/A";
 
     private static final String LOG_TAG = LinkFragment.class.getSimpleName();
 
@@ -75,16 +79,20 @@ public class LinkFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private View itemView;
+
+    private static Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+
+    public static LnkFtchDbHelper db;
+
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public LinkFragment(){
@@ -99,6 +107,7 @@ public class LinkFragment extends Fragment
         setHasOptionsMenu(true);
 
         rootView = inflater.inflate(R.layout.link_list, container, false);
+        itemView = inflater.inflate(R.layout.link_list_item, container, false);
         activity = getActivity();
 
         // Find a reference to the {@link ListView} in the layout
@@ -111,23 +120,22 @@ public class LinkFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
+
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_LINKS);
         db.insertSomeFakeEntries();
+        //QueryUtils.createLink(REQUEST_URL, db);
+
 
         displayListView();
 
+        return rootView;
+    }
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static void callLoader(String pUrl){
+        url = pUrl;
+        LinkFragment linkFragment = new LinkFragment();
 
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            //LoaderManager loaderManager = getLoaderManager();
-
+<<<<<<< HEAD
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
@@ -150,9 +158,16 @@ public class LinkFragment extends Fragment
             emptyStateTextView.setText(R.string.no_internet_connection);
         }
         return rootView;
+=======
+        linkFragment.callLoaderHelper();
+
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
-
+    public void callLoaderHelper(){
+        Log.v(LOG_TAG, "callback: " + this);
+        activity.getLoaderManager().restartLoader(LINK_LOADER_ID, null, this).forceLoad();
+    }
     @Override
     public Loader<List<Link>> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -161,7 +176,11 @@ public class LinkFragment extends Fragment
 //                getString(R.string.settings_language_key),
 //                getString(R.string.settings_language_default));
 //
+<<<<<<< HEAD
         return new LinkLoader(getContext(), REQUEST_URL,db);
+=======
+        return new LinkLoader(getContext(), url, db);
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
     @Override
@@ -220,39 +239,81 @@ public class LinkFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        /*
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllLinkInfo();
+
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
 
 
         // The desired columns to be bound
-        String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL
+        final String[] columns = new String[] {
+                LnkContract.LinkEntry.COLUMN_LINK_FAVICON,
+                LnkContract.LinkEntry.COLUMN_LINK_NAME,
+                LnkContract.LinkEntry.COLUMN_LINK_URL,
+                LnkContract.LinkEntry.COLUMN_LINK_TAB_NAME,
+                LnkContract.LinkEntry.COLUMN_LINK_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
+                R.id.link_image,
                 R.id.link_name,
                 R.id.link_url,
-                R.id.link_address
-        };
+                R.id.link_tab_name, //change to tabName
+                R.id.link_time
 
+        };
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                getContext(), R.layout.link_list_item,
                 cursor,
                 columns,
                 to,
                 0);
+
+        // Override the handling of R.id.icon to load an image instead of a string.
+        dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            public boolean setViewValue(View view, Cursor cursor, int i){
+
+                //Log.v(LOG_TAG, "      view: " + view.getId() + "\nlink_image: " + R.id.link_image);
+
+                //if the view id is the same as the link_image
+                if (view.getId() == R.id.link_image) {
+                    //Log.v(LOG_TAG, "View found, placing favicon onto item");
+                    // Set the ImageView.
+                    ImageView favIconImageView = (ImageView) view;
+
+                    String favIconURL = cursor.getString(cursor.getColumnIndexOrThrow("favicon"));
+                    //Log.v(LOG_TAG, "favIconUrl: " + favIconURL);
+                    //Picasso places it on that view with the url provided by the databse
+                    Picasso.with(getContext()).load(favIconURL).into(favIconImageView);
+                    return true;
+                } else {  // Process the rest of the adapter with default settings.
+                    return false;
+                }
+            }
+        });
+
+
+
 
         linksListView.setAdapter(dataAdapter);
 
@@ -275,32 +336,14 @@ public class LinkFragment extends Fragment
         });
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchLinkByUrl(constraint.toString());
             }
         });
 
-                /*gets and sets bitmap for each link*/
-        ImageView newImgView = (ImageView)activity.findViewById(R.id.link_image);
-        for(int i=0;i<dataAdapter.getCount();i++){
-            dataAdapter.getItem(i);
-        }
-        //newImgView.setImageBitmap();
 
-    }
-    /*http://stackoverflow.com/questions/14513695/creating-a-url-string-to-get-a-favicon-in-java*/
-    public static Bitmap getBitmapFromURL(URL src) {
-        try {
-            URL url = src;
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        // Hide loading indicator because the data has been loaded
+        loadingIndicator.setVisibility(View.GONE);
+
     }
 
 }

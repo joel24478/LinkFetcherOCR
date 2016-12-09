@@ -31,39 +31,8 @@ public final class LnkContract {
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_LINKS = "linkfetcherocr";
-
-//    /*
-//     * Inner class that defines constant values for the User database table.
-//     * each entry in the table represents a single User
-//     * Later User
-//     *
-//     */
-//    public static final class UserEntry implenets BaseColumns {
-//    /** The content URI to access the searched data in the provider */
-//    public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_LINKS);
-//
-//    /**
-//     * The MIME type of the {@link #CONTENT_URI} for a list of saved searched.
-//     */
-//    public static final String CONTENT_LIST_TYPE =
-//            ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
-//
-//    /**
-//     * The MIME type of the {@link #CONTENT_URI} for a single saved search.
-//     */
-//    public static final String CONTENT_ITEM_TYPE =
-//            ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
-//
-//    /** Name of database table for pets */
-//    public final static String TABLE_NAME = "links";
-//
-//    /**
-//     * Unique ID number for entry in table
-//     * Type: INTEGER
-//     */
-//    public final static String _ID = BaseColumns._ID;
-//     * }
-//
+    public static final String PATH_PHONE = "phonefetcher";
+    public static final String PATH_EMAIL = "emailfetcher";
 
     public static final class LinkEntry implements BaseColumns {
 
@@ -72,24 +41,37 @@ public final class LnkContract {
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINKS;
-        public final static String TABLE_NAME = "lnkFtchr";
-        public final static String _ID = BaseColumns._ID;
 
-        public final static String COLUMN_FETCHED_NAME ="name";
+        /*For link Table*/
+        public final static String TABLE_NAME_LINKS = "lnkFtchr";
+        public final static String LINK_ID = BaseColumns._ID;
+        public final static String COLUMN_LINK_NAME ="name";
+        public final static String COLUMN_LINK_FAVICON = "favicon";
+        public final static String COLUMN_LINK_URL = "url";
+        public final static String COLUMN_LINK_TIME = "time";
+        public final static String COLUMN_LINK_TAB_NAME = "tabname";
 
-        public final static String COLUMN_FETCHED_ADDRESS = "eaddress";
+        /*for phone table*/
+        public final static String TABLE_NAME_PHONE = "phones";
+        public final static String PHONE_ID = BaseColumns._ID;
+        public final static String COLUMN_PHONE_NAME ="name";
+        public final static String COLUMN_PHONE_PHONENUM = "phnNum";
+        public final static String COLUMN_PHONE_TIME = "time";
 
-        public final static String COLUMN_FETCHED_URL = "url";
-        public final static String COLUMN_SEARCHED_TIME = "time";
-        public final static String COLUMN_IMAGE = "image";
-        public static boolean isValidEmail(String email) {
-            return true;
-        }
+        /*for the email table*/
+        public final static String TABLE_NAME_EMAIL = "emails";
+        public final static String EMAIL_ID = BaseColumns._ID;
+        public final static String COLUMN_EMAIL_NAME = "name";
+        public final static String COLUMN_EMAIL_EM = "email";
+        public final static String COLUMN_EMAIL_TIME = "time";
+
+
 
         public static boolean isValidBaseUrl(String url){
             return true;
         }
     }
+
 
 }
 

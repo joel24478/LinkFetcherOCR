@@ -21,18 +21,27 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
     private Context context;
     LnkFtchDbHelper db;
 
+    private LnkFtchDbHelper db;
+
     /**
      * Constructs a new {@link LinkLoader}.
      *
      * @param pContext of the activity
      * @param pUrl to load data from
      */
+<<<<<<< HEAD
     public LinkLoader(Context pContext, String pUrl, LnkFtchDbHelper pDb) {
         super(pContext);
         url = pUrl;
         //context = pContext;
+=======
+    public LinkLoader(Context context, String pUrl, LnkFtchDbHelper pDb) {
+        super(context);
+        url = pUrl;
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
         db = pDb;
     }
+
 
     @Override
     protected void onStartLoading() {
@@ -45,9 +54,11 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
     @Override
     public List<Link> loadInBackground() {
         if (url == null) {
+            Log.e(LOG_TAG, "url is null");
             return null;
         }
 
+<<<<<<< HEAD
 //        String test = "Failed";
 //
 //        try {
@@ -59,6 +70,24 @@ public class LinkLoader extends AsyncTaskLoader<List<Link>> {
 //        }
 //
 //        Log.v(LOG_TAG, "FavIcon: " + test);
+=======
+        Log.v(LOG_TAG, "starting parser");
+         if(!LinkParser.getLink(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a link ");
+             QueryUtils.createLink(url ,LinkFragment.db);
+        }else if(!LinkParser.getEmail(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a email ");
+            QueryUtils.createEmail(url ,LinkFragment.db);
+
+        }else if(!LinkParser.getPhoneNumber(url).equals("N/A")){
+            Log.v(LOG_TAG, url + " is a phone number ");
+            QueryUtils.createPhoneNumber(url, LinkFragment.db);
+
+        }else{
+            Log.e(LOG_TAG, "This is neither a link, email nor phone number: " + url);
+
+        }
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
 
         QueryUtils.createLink(url, db);
 

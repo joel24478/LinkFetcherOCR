@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,12 +25,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class EmailFragment extends Fragment
         SharedPreferences.OnSharedPreferenceChangeListener {
 
 
+    private static final String LOG_TAG = EmailFragment.class.getSimpleName();
     private static final String REQUEST_URL = "www.yahoo.com";
 
     /**
@@ -56,16 +60,16 @@ public class EmailFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    private LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public EmailFragment(){
@@ -91,66 +95,17 @@ public class EmailFragment extends Fragment
         /*Jwydo*/
         db = new LnkFtchDbHelper(getActivity());
         db.open();
-        /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
-        db.insertSomeFakeEntries();
+        /*the Db will load correctly and everything, just need to invoke calls like these
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_EMAIL);
+        db.createEmailEntry("SomeName", "SomeEmail", "SomeTime");
+        db.createEmailEntry("NewEmail", "newEmail@student.uml.edu", "SomeTime");
+        */
+
+        //Testing whether QueryUtils works
+        //QueryUtils.createEmail("joel24478@gmail.com", db);
 
         displayListView();
 
-        /*Jwydo * Deprecated to use simplecursor adapter
-        *
-        // Create a new adapter that takes an empty list of links as input
-        //adapter = new LinkAdapter(getActivity(), new ArrayList<Link>());
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        linksListView.setAdapter(adapter);
-
-        // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected link.
-        linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current link that was clicked on
-                Link currentLink = adapter.getItem(position);
-
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri linkUri = Uri.parse(currentLink.getUrl());
-
-                // Create a new intent to view the Link URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, linkUri);
-
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
-            }
-        });
-        */
-
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details on the currently active default data network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            //LoaderManager loaderManager = getLoaderManager();
-
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-            // because this activity implements the LoaderCallbacks interface).
-            //loaderManager.initLoader(LINK_LOADER_ID, null, (android.support.v4.app.LoaderManager.LoaderCallbacks<List<Link>>) activity);
-            activity.getLoaderManager().initLoader(LINK_LOADER_ID, null, this);
-        } else {
-            // Otherwise, display error
-            // First, hide loading indicator so error message will be visible
-            View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
-            loadingIndicator.setVisibility(View.GONE);
-
-            // Update empty state with no connection error message
-            emptyStateTextView.setText(R.string.no_internet_connection);
-        }
         return rootView;
     }
 
@@ -222,43 +177,71 @@ public class EmailFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        /*
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllEmailInfo();
+
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
 
         // The desired columns to be bound
         String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_IMAGE
+                LnkContract.LinkEntry.COLUMN_EMAIL_NAME,
+                LnkContract.LinkEntry.COLUMN_EMAIL_EM,
+                LnkContract.LinkEntry.COLUMN_EMAIL_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
-                R.id.link_name,
-                R.id.link_url,
-                R.id.link_address
+                R.id.link_ename,
+                R.id.link_email,
+                R.id.link_email_time
         };
 
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                rootView.getContext(), R.layout.link_list_iteme,
                 cursor,
                 columns,
                 to,
                 0);
+        /*
+        dataAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            public boolean setViewValue(View view, Cursor cursor, int i){
+                //hardcode favicon
+                if (i == 3) {
+                    ImageView favIconView = (ImageView) view;
+                    Picasso.with(rootView.getContext()).load("http://i.imgur.com/DvpvklR.png").into(favIconView);
+
+
+
+                }
+                return true;
+            }
+
+        });
+        */
 
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
+
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -266,19 +249,25 @@ public class EmailFragment extends Fragment
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                String url =
-                        cursor.getString(cursor.getColumnIndexOrThrow("url"));
-                Intent newI = new Intent(Intent.ACTION_VIEW);
-                newI.setData(Uri.parse(url));
+
+                String email =
+                        cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                Intent newI = new Intent(Intent.ACTION_SENDTO);
+                newI.setData(Uri.parse("mailto:" + email));
                 startActivity(newI);
 
             }
         });
+
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchEmailByName(constraint.toString());
             }
         });
+
+        // Hide loading indicator because the data has been loaded
+
+        loadingIndicator.setVisibility(View.GONE);
+
     }
 }

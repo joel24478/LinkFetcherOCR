@@ -24,13 +24,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkContract;
 import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
-import com.example.ocr.linkfetcherocr.deprecated.LinkAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,16 +58,16 @@ public class PhoneNumberFragment extends Fragment
     /** TextView that is displayed when the list is empty */
     private TextView emptyStateTextView;
 
-    View rootView;
+    private View rootView;
 
-    Activity activity;
+    private Activity activity;
 
     /*Jwydo*/
-    LnkFtchDbHelper db;
+    private LnkFtchDbHelper db;
 
     private SimpleCursorAdapter dataAdapter;
 
-    ListView linksListView;
+    private ListView linksListView;
     /*Jwydo*/
 
     public PhoneNumberFragment(){
@@ -93,8 +94,10 @@ public class PhoneNumberFragment extends Fragment
         db = new LnkFtchDbHelper(getActivity());
         db.open();
         /*the Db will load correctly and everything, just need to invoke calls like these*/
-        db.deleteAllEntries();
-        db.insertSomeFakeEntries();
+        db.deleteAllEntries(LnkContract.LinkEntry.TABLE_NAME_PHONE);
+        db.createPhoneEntry("Jonathan", "9783146229", "12:12");
+        db.createPhoneEntry("Julianne", "SomemoreData", "blahhh");
+
 
         displayListView();
 
@@ -223,35 +226,47 @@ public class PhoneNumberFragment extends Fragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        /*
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
     private void displayListView(){
-        Cursor cursor = db.fetchAllInfo();
+        Cursor cursor = db.fetchAllPhoneInfo();
+
+        View loadingIndicator = rootView.findViewById(R.id.loading_indicator);
+
+        if(cursor.getCount() == 0){
+            // Hide loading indicator because the data has been loaded
+            loadingIndicator.setVisibility(View.GONE);
+
+            // Set empty state text to display "No links found."
+            emptyStateTextView.setText(R.string.no_links);
+        }
+
 
         // The desired columns to be bound
         String[] columns = new String[] {
-                LnkContract.LinkEntry.COLUMN_FETCHED_NAME,
-                LnkContract.LinkEntry.COLUMN_FETCHED_ADDRESS,
-                LnkContract.LinkEntry.COLUMN_FETCHED_URL,
-                LnkContract.LinkEntry.COLUMN_IMAGE
+                LnkContract.LinkEntry.COLUMN_PHONE_NAME,
+                LnkContract.LinkEntry.COLUMN_PHONE_PHONENUM,
+                LnkContract.LinkEntry.COLUMN_PHONE_TIME
         };
 
         // the XML defined views which the data will be bound to
         int[] to = new int[] {
-                R.id.link_name,
-                R.id.link_url,
-                R.id.link_address
+                R.id.link_pname,
+                R.id.link_phone,
+                R.id.link_phone_time
         };
 
         // create the adapter using the cursor pointing to the desired data
         //as well as the layout information
         dataAdapter = new SimpleCursorAdapter(
-                rootView.getContext(), R.layout.link_list_item,
+                rootView.getContext(), R.layout.link_list_itemp,
                 cursor,
                 columns,
                 to,
@@ -260,6 +275,7 @@ public class PhoneNumberFragment extends Fragment
         linksListView.setAdapter(dataAdapter);
 
         /*adds the webpage intent*/
+
         linksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> listView, View view,
@@ -267,20 +283,22 @@ public class PhoneNumberFragment extends Fragment
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-                // Get the state's capital from this row in the database.
-                String url =
-                        cursor.getString(cursor.getColumnIndexOrThrow("url"));
-                Intent newI = new Intent(Intent.ACTION_VIEW);
-                newI.setData(Uri.parse(url));
-                startActivity(newI);
-
+                String phone =
+                        cursor.getString(cursor.getColumnIndexOrThrow("phnNum"));
+                Intent newI = new Intent(Intent.ACTION_DIAL);
+                newI.setData(Uri.parse("tel:" + phone));
+                    startActivity(newI);
             }
         });
+
         dataAdapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.fetchEntryByUrl(constraint.toString());
+                return db.fetchPhoneByName(constraint.toString());
             }
         });
+
+        // Hide loading indicator because the data has been loaded
+        loadingIndicator.setVisibility(View.GONE);
     }
 
 }

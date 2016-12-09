@@ -108,6 +108,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
                 Snackbar.LENGTH_LONG)
                 .show();
+        // To get a back button when capturing a picture
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     /**

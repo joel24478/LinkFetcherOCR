@@ -15,6 +15,19 @@ public class LinkParser {
 
     private static final String LOG_TAG = LinkParser.class.getSimpleName();
 
+    // Pattern for recognizing a URL, based off RFC 3986
+    private static final Pattern linkPattern = Pattern.compile(
+            "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
+                    + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+                    + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
+            Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+
+    //Regular expression for finding email addresses
+    private static final Pattern emailPattern = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+");
+
+    //Regular expression for finding email addresses
+    private static final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
+
     /**
      * Create a private constructor because no one should ever create a {@link LinkParser} object.
      * This class is only meant to hold static variables and methods, which can be accessed
@@ -24,65 +37,52 @@ public class LinkParser {
         //Empty Constructor
     }
 
-    public static List<String> getLink(String text){
+
+    public static String getLink(String text){
         //if no link is found then return N/A
         String link = "N/A";
-        List<String> links = new ArrayList<String>();
-
-        // Pattern for recognizing a URL, based off RFC 3986
-        Pattern pattern = Pattern.compile(
-                "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
-                        + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
-                        + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
-                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+        //List<String> links = new ArrayList<String>();
 
         //Compare the text given with the regular expression
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = linkPattern.matcher(text);
 
-        Log.v(LOG_TAG, "Retrieving links...");
+        Log.v(LOG_TAG, "Retrieving link...");
 
         while (matcher.find()){
             link = text.substring(matcher.start(0),
                     matcher.end(0));
-            links.add(link);
             Log.v(LOG_TAG, "Link retrieved: " + link);
         }
 
-        Log.v(LOG_TAG, "All links retrieved" + links);
-        return links;
+        Log.v(LOG_TAG, "All links retrieved: " + link);
+        return link;
     }
 
-    public static List<String> getEmail(String text){
+    public static String getEmail(String text){
         //if no email is found then return N/A
         String email = "N/A";
-        List<String> emails = new ArrayList<String>();
-
-        //Regular expression for finding email addresses
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+");
+        //List<String> emails = new ArrayList<String>();
 
         //Compare the text given with the regular expression
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = emailPattern.matcher(text);
 
         while (matcher.find()){
             for( int groupIdx = 0; groupIdx < matcher.groupCount()+1; groupIdx++ ){
                 email = matcher.group(groupIdx);
-                emails.add(email);
+                //emails.add(email);
                 Log.v(LOG_TAG,"Email retrived: " + email);
             }
         }
 
-        return emails;
+        return email;
     }
 
     public static String getPhoneNumber(String text){
         //if no phone number is found then return N/A
         String phoneNumber = "N/A";
 
-        //Regular expression for finding email addresses
-        Pattern pattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
-
         //Compare the text given with the regular expression
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = phoneNumberPattern.matcher(text);
 
         while (matcher.find()){
             for( int groupIdx = 0; groupIdx < matcher.groupCount()+1; groupIdx++ ){
@@ -90,6 +90,8 @@ public class LinkParser {
                 System.out.println(phoneNumber);
             }
         }
+
+        Log.v(LOG_TAG, "Phone number: " + phoneNumber);
 
         return phoneNumber;
     }

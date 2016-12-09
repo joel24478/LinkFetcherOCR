@@ -63,6 +63,10 @@ public class QueryUtils {
     /**
      * Create a URL entry in the database.
      * @param pUrl the url for the site
+<<<<<<< HEAD
+=======
+     * @param pDb the database to place entry in
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
      *
      */
     public static void createLink(String pUrl, LnkFtchDbHelper pDb){
@@ -90,6 +94,7 @@ public class QueryUtils {
             Log.v(LOG_TAG, "favIcon: " + favIcon + "\nname: " + name + "\ntitle: " + title + "\ndate: " + date);
 
             //Create an entry in the database
+<<<<<<< HEAD
             pDb.createEntry(title, name, url, favIcon);
         }catch (IOException e){
             Log.e(LOG_TAG, e.getMessage());
@@ -105,6 +110,36 @@ public class QueryUtils {
     private static void createEmail(String pEmail, LnkFtchDbHelper pDb) {
 
         //pDb.createEntry()
+=======
+            pDb.createLinkEntry(name, title, favIcon, url, date);
+        }catch (IOException e){
+            Log.e(LOG_TAG, e.getMessage());
+        }
+    }
+
+    /**
+     * Create a Email entry in the database
+     * @param pEmail the email to be add to the database
+     * @param pDb the database to place the entry in
+     * @return void.
+     */
+    public static void createEmail(String pEmail, LnkFtchDbHelper pDb) {
+
+        String date = getTimeStamp();
+        pDb.createEmailEntry("N/A", pEmail, date);
+    }
+
+    /**
+     * Create a Phone Number entry in the database
+     * @param pNumber the Phone number to be add to the database
+     * @param pDb the database to place the entry in
+     * @return void.
+     */
+    public static void createPhoneNumber(String pNumber, LnkFtchDbHelper pDb) {
+
+        String date = getTimeStamp();
+        pDb.createPhoneEntry("N/A", pNumber, date);
+>>>>>>> 8ed03a4763473510e23485196273b37d19dcb821
     }
 
     /**
@@ -212,7 +247,7 @@ public class QueryUtils {
         String favicon = "N/A";
 
         //Connected to the url and get the html file so we can travers the file
-        Document doc = Jsoup.connect(formattedUrl).get();
+        Document doc = Jsoup.connect("https://www.google.com").get();
         //Travers the file to find the first occurrence of a .ico file
         Element element = doc.head().select("link[href~=.*\\.ico]").first();
 
@@ -263,4 +298,6 @@ public class QueryUtils {
         return favicon;
     }
 }
+
+
 

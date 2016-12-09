@@ -16,19 +16,21 @@
 
 package com.example.ocr.linkfetcherocr;
 
-import android.app.ActionBar;
-import android.app.Activity;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
+import com.example.ocr.linkfetcherocr.dbLnkFtch.LnkFtchDbHelper;
 import com.google.android.gms.common.api.CommonStatusCodes;
 
 /**
@@ -41,7 +43,11 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
     private CompoundButton autoFocus;
     private CompoundButton useFlash;
     private TextView statusMessage;
-    private TextView textValue;
+    private EditText textValue;
+    private String text;
+    private String tempText;
+    private LinkLoader loader;
+    private Context context;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "CameraActivity"; /*Might need to change*/
@@ -51,8 +57,10 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
 
+        context = getApplicationContext();
+
         statusMessage = (TextView)findViewById(R.id.status_message);
-        textValue = (TextView)findViewById(R.id.text_value);
+        textValue = (EditText) findViewById(R.id.text_value);
 
         autoFocus = (CompoundButton) findViewById(R.id.auto_focus);
         useFlash = (CompoundButton) findViewById(R.id.use_flash);
@@ -60,6 +68,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         findViewById(R.id.read_text).setOnClickListener(this);
         // my_child_toolbar is defined in the layout file
 
+        //getting a back button once taken picture
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
@@ -105,7 +114,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String text = null;
+        text = null;
         if(requestCode == RC_OCR_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
@@ -113,7 +122,7 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
                     statusMessage.setText(R.string.ocr_success);
                     textValue.setText(text);
                     Log.d(TAG, "Text read: " + text);
-                    // Joel the "text" is right here I could just return here
+                    tempText = text;
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");
@@ -126,6 +135,19 @@ public class CameraActivity extends ActionBarActivity implements View.OnClickLis
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-        Log.d("hey12222", text);
+
     }
+    //When save button is clicked it will take the amera text and make an entry
+    public void buttonOnClick(View v) {
+
+        textValue = (EditText)findViewById(R.id.text_value);
+        text = textValue.getText().toString();
+
+        Log.v(TAG, "Starting loader to parse text");
+        LinkLoader loader = new LinkLoader(getApplicationContext(), text, LinkFragment.db);
+        loader.loadInBackground();
+
+
+    }
+
 }
